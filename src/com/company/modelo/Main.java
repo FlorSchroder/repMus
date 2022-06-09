@@ -1,6 +1,7 @@
-package com.company;
+package com.company.modelo;
+import com.company.modelo.Cancion;
+import com.company.modelo.Lista;
 import com.company.view.MarcoBusqueda;
-import com.company.view.MarcoPrincipal;
 
 import javax.swing.*;
 
