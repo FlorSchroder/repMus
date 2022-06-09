@@ -30,6 +30,8 @@ public class MarcoPrincipal extends JFrame {
         JButton b5 = new JButton("Descargas");
         JButton b6 = new JButton("Mi lista");
 
+
+
         panel1.add(b1);
         panel1.add(b2);
         panel1.add(b3);
