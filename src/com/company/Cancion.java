@@ -7,6 +7,8 @@ public class Cancion {
     private String artista;
     private int duracion;
 
+    public Cancion(){}
+
     public Cancion(String nombre, String genero, String artista, int duracion){
         this.nombre = nombre;
         this.genero = genero;
