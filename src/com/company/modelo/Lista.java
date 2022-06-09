@@ -1,4 +1,6 @@
-package com.company;
+package com.company.modelo;
+
+import com.company.modelo.Cancion;
 
 import java.util.ArrayList;
 
