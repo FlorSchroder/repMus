@@ -1,5 +1,7 @@
 package com.company.view;
 
+import com.company.controller.Driver;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,23 +16,30 @@ public class MarcoPrincipal extends JFrame {
         // PANEL SUPERIOR //
         JPanel panelSup = new JPanel();
         panelSup.setLayout(new FlowLayout());
-        JTextField textBusqueda = new JTextField();
+        textBusqueda = new JTextField();
         textBusqueda.setColumns(50);
-        JButton btnBuscar = new JButton("Buscar");
+        textBusqueda.addActionListener(new Driver(this));
+        btnBuscar = new JButton("Buscar");
+        btnBuscar.addActionListener(new Driver(this));
         panelSup.add(textBusqueda);
         panelSup.add(btnBuscar);
         add(panelSup, BorderLayout.NORTH);
 
 
         // PANEL CENTRAL //
-        JButton b1 = new JButton("Probá con [Artista]");
-        JButton b2 = new JButton("[Día]");
-        JButton b3 = new JButton("[Noche]");
-        JButton b4 = new JButton("Me gusta");
-        JButton b5 = new JButton("Descargas");
-        JButton b6 = new JButton("Mi lista");
+        b1 = new JButton("Probá con [Artista]");
+        b2 = new JButton("[Día]");
+        b3 = new JButton("[Noche]");
+        b4 = new JButton("Me gusta");
+        b5 = new JButton("Descargas");
+        b6 = new JButton("Mi lista");
 
-
+        b1.addActionListener(new Driver(this));
+        b2.addActionListener(new Driver(this));
+        b3.addActionListener(new Driver(this));
+        b4.addActionListener(new Driver(this));
+        b5.addActionListener(new Driver(this));
+        b6.addActionListener(new Driver(this));
 
         panel1.add(b1);
         panel1.add(b2);
@@ -67,5 +76,14 @@ public class MarcoPrincipal extends JFrame {
 
 
     }
+    public JButton b1;
+    public JButton b2;
+    public JButton b3;
+    public JButton b4;
+    public JButton b5;
+    public JButton b6;
+
+    public JTextField textBusqueda;
+    public JButton btnBuscar;
 }
 
