@@ -1,8 +1,6 @@
 package com.company.controller;
 
 import com.company.view.MarcoPrincipal;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
