@@ -2,6 +2,7 @@ package com.company.view;
 
 import com.company.controller.DriverMarcoBusqueda;
 import com.company.modelo.Reproductor;
+import com.company.modelo.Cancion;
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -43,10 +44,10 @@ public class MarcoBusqueda extends JFrame {
 
         //JTable tabla = new JTable(datosFila, datosColumna);
         //ModeloDatos modeloDatos = new ModeloDatos();
+
         //tabla = new JTable(modeloDatos);
         DefaultTableModel dm = new DefaultTableModel();
-        dm.setDataVector(new Object[][]{{"Hola", "TINI", "Cachengue"},
-                {"Chau", "Fulanito", "Rock"}}, new Object[]{"Nombre", "Artista", "Genero", "Acciones"});
+        dm.setDataVector(this.reproductor.getData(reproductor.buscar("canciones Repmus")), new Object[]{"Nombre", "Artista", "Genero", "Descargar", "Reproducir"});
         tabla = new JTable(dm);
 
         //modeloDatos.addTableModelListener(new DriverTabla());
@@ -54,8 +55,11 @@ public class MarcoBusqueda extends JFrame {
 
         //btnTabla.addActionListener(new DriverMarcoBusqueda(this));
         //tabla.setDefaultRenderer(Object.class, new TablaRender());
-        tabla.getColumn("Acciones").setCellRenderer(new ButtonRenderer());
-        tabla.getColumn("Acciones").setCellEditor(new ButtonEditor(new JCheckBox()));
+        tabla.getColumn("Descargar").setCellRenderer(new ButtonRenderer());
+        tabla.getColumn("Descargar").setCellEditor(new ButtonEditor(new JCheckBox()));
+        tabla.getColumn("Reproducir").setCellRenderer(new ButtonRendererRep());
+        tabla.getColumn("Reproducir").setCellEditor(new ButtonEditor(new JCheckBox()));
+
 
 
         //tabla.getColumn("Acciones").setCellRenderer(btnTabla2);
@@ -100,80 +104,7 @@ public class MarcoBusqueda extends JFrame {
     public JTextField textBusqueda;
     public JTable tabla;
     public JLabel nombreCancion;
-    //public botonTabla btnTabla;
-    //public botonTablaRep btnTabla2;
 
-    /*class ModeloDatos extends AbstractTableModel {
-        int altura = 0;
-
-        @Override
-        public int getRowCount() {
-            if (reproductor.listaExiste(nombre)){
-                altura = reproductor.buscar(nombre).getSize();
-            }
-            return altura;
-        }
-
-        @Override
-        public int getColumnCount() {
-            return 4;
-        }
-
-        public String getColumnName(int n){
-            switch (n){
-                case 0:
-                    return "Nombre";
-                case 1:
-                    return "Artista";
-                case 2:
-                    return "Género";
-                case 3:
-                    return "Acciones";
-                default:
-                    return "Null";
-            }
-        }
-
-        @Override
-        public void setValueAt (Object aValue, int rowIndex, int columnIndex){
-            Cancion cancion = new Cancion();
-            if (reproductor.listaExiste(nombre)){
-                cancion = reproductor.buscar(nombre).getCanciones().get(rowIndex);
-            }
-
-            switch (columnIndex){
-                case 0:
-                    cancion.getGenero();
-                    break;
-                case 1:
-                    cancion.getArtista();
-                    break;
-                case 2:
-                    cancion.getGenero();
-                    break;
-            }
-        }
-
-        @Override
-        public Object getValueAt (int rowIndex, int columnIndex){
-            Cancion cancion = new Cancion();
-            if (reproductor.listaExiste(nombre)){
-                cancion = reproductor.buscar(nombre).getCanciones().get(rowIndex);
-            }
-
-            switch (columnIndex){
-                case 0:
-                    return cancion.getNombre();
-                case 1:
-                    return cancion.getArtista();
-                case 2:
-                    return cancion.getGenero();
-               // case 3:
-                   // return btnTabla;
-            }
-            return null;
-        }
-    }*/
 
     class ButtonRenderer extends JButton implements TableCellRenderer {
 
@@ -191,7 +122,42 @@ public class MarcoBusqueda extends JFrame {
                 setForeground(table.getForeground());
                 setBackground(UIManager.getColor("Button.background"));
             }
-            setText((value == null) ? "Descargar" : value.toString());
+            ImageIcon downloaded = new ImageIcon("src/com/company/images/downloaded.png");
+            ImageIcon download = new ImageIcon("src/com/company/images/download.png");
+
+            if (value == null){
+                setIcon(download);
+            }else {
+                setIcon(downloaded);
+            }
+            return this;
+        }
+    }
+
+    class ButtonRendererRep extends JButton implements TableCellRenderer {
+
+        public ButtonRendererRep() {
+            setOpaque(true);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                                                       boolean isSelected, boolean hasFocus, int row, int column) {
+            if (isSelected) {
+                setForeground(table.getSelectionForeground());
+                setBackground(table.getSelectionBackground());
+            } else {
+                setForeground(table.getForeground());
+                setBackground(UIManager.getColor("Button.background"));
+            }
+            ImageIcon play = new ImageIcon("src/com/company/images/play.png");
+            ImageIcon pause = new ImageIcon("src/com/company/images/pause.png");
+
+            if (value == null){
+                setIcon(play);
+            }else {
+                setIcon(pause);
+            }
             return this;
         }
     }
@@ -207,6 +173,7 @@ public class MarcoBusqueda extends JFrame {
             super(checkBox);
             button = new JButton();
             button.setOpaque(true);
+            button.setSize(20,20);
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -246,8 +213,6 @@ public class MarcoBusqueda extends JFrame {
             return super.stopCellEditing();
         }
     }
-
-
     public MarcoPrincipal getMarcoPrincipal() {
         return marcoPrincipal;
     }
@@ -263,9 +228,4 @@ public class MarcoBusqueda extends JFrame {
     public void setReproductor(Reproductor reproductor) {
         this.reproductor = reproductor;
     }
-
-
-
-
-
 }

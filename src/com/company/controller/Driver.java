@@ -44,6 +44,7 @@ public class Driver implements ActionListener {
         if (marco.b6 == e.getSource()){
             MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Canciones RepMus", reproductor);
             reproductor.selectListaSonando(reproductor.buscar("canciones Repmus"));
+
             marcoBsqueda.setVisible(true);
             marco.setVisible(false);
         }
