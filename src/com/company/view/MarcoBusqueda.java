@@ -1,13 +1,13 @@
 package com.company.view;
 
 import com.company.controller.DriverMarcoBusqueda;
-import com.company.modelo.Cancion;
 import com.company.modelo.Reproductor;
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableCellRenderer;
+import javax.swing.table.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MarcoBusqueda extends JFrame {
     private MarcoPrincipal marcoPrincipal;
@@ -42,11 +42,25 @@ public class MarcoBusqueda extends JFrame {
 
 
         //JTable tabla = new JTable(datosFila, datosColumna);
-        ModeloDatos modeloDatos = new ModeloDatos();
-        tabla = new JTable(modeloDatos);
-        btnTabla = new botonTabla();
-        btnTabla.addActionListener(new DriverMarcoBusqueda(this));
-        tabla.getColumn("Acciones").setCellRenderer(btnTabla);
+        //ModeloDatos modeloDatos = new ModeloDatos();
+        //tabla = new JTable(modeloDatos);
+        DefaultTableModel dm = new DefaultTableModel();
+        dm.setDataVector(new Object[][]{{"Hola", "TINI", "Cachengue"},
+                {"Chau", "Fulanito", "Rock"}}, new Object[]{"Nombre", "Artista", "Genero", "Acciones"});
+        tabla = new JTable(dm);
+
+        //modeloDatos.addTableModelListener(new DriverTabla());
+        //btnTabla = new botonTabla();
+
+        //btnTabla.addActionListener(new DriverMarcoBusqueda(this));
+        //tabla.setDefaultRenderer(Object.class, new TablaRender());
+        tabla.getColumn("Acciones").setCellRenderer(new ButtonRenderer());
+        tabla.getColumn("Acciones").setCellEditor(new ButtonEditor(new JCheckBox()));
+
+
+        //tabla.getColumn("Acciones").setCellRenderer(btnTabla2);
+        tabla.setPreferredScrollableViewportSize(tabla.getPreferredSize());
+
         add(new JScrollPane(tabla), BorderLayout.CENTER);
 
         // PANEL INFERIOR //
@@ -86,9 +100,10 @@ public class MarcoBusqueda extends JFrame {
     public JTextField textBusqueda;
     public JTable tabla;
     public JLabel nombreCancion;
-    public botonTabla btnTabla;
+    //public botonTabla btnTabla;
+    //public botonTablaRep btnTabla2;
 
-    class ModeloDatos extends AbstractTableModel {
+    /*class ModeloDatos extends AbstractTableModel {
         int altura = 0;
 
         @Override
@@ -158,17 +173,17 @@ public class MarcoBusqueda extends JFrame {
             }
             return null;
         }
-    }
+    }*/
 
-    class botonTabla extends JButton implements TableCellRenderer {
+    class ButtonRenderer extends JButton implements TableCellRenderer {
+
+        public ButtonRenderer() {
+            setOpaque(true);
+        }
 
         @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            if (value != null) {
-                setText("");
-            } else {
-                setText("Descargar");
-            }
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                                                       boolean isSelected, boolean hasFocus, int row, int column) {
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setBackground(table.getSelectionBackground());
@@ -176,9 +191,62 @@ public class MarcoBusqueda extends JFrame {
                 setForeground(table.getForeground());
                 setBackground(UIManager.getColor("Button.background"));
             }
+            setText((value == null) ? "Descargar" : value.toString());
             return this;
         }
     }
+
+
+    class ButtonEditor extends DefaultCellEditor {
+
+        protected JButton button;
+        private String label;
+        private boolean isPushed;
+
+        public ButtonEditor(JCheckBox checkBox) {
+            super(checkBox);
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    fireEditingStopped();
+                }
+            });
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value,
+                                                     boolean isSelected, int row, int column) {
+            if (isSelected) {
+                button.setForeground(table.getSelectionForeground());
+                button.setBackground(table.getSelectionBackground());
+            } else {
+                button.setForeground(table.getForeground());
+                button.setBackground(table.getBackground());
+            }
+            label = (value == null) ? "" : value.toString();
+            button.setText(label);
+            isPushed = true;
+            return button;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            if (isPushed) {
+                JOptionPane.showMessageDialog(button, label + "Descargado!");
+            }
+            isPushed = false;
+            return label;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+    }
+
 
     public MarcoPrincipal getMarcoPrincipal() {
         return marcoPrincipal;
@@ -195,5 +263,9 @@ public class MarcoBusqueda extends JFrame {
     public void setReproductor(Reproductor reproductor) {
         this.reproductor = reproductor;
     }
+
+
+
+
 
 }

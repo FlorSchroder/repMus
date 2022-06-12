@@ -4,6 +4,9 @@ import com.company.modelo.Lista;
 import com.company.modelo.Reproductor;
 import com.company.view.MarcoBusqueda;
 
+import javax.swing.*;
+import javax.swing.table.TableCellEditor;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,10 +33,12 @@ public class DriverMarcoBusqueda implements ActionListener {
                System.out.println("No existe la cancion");
            }
         }
-        if (marcoBsqueda.btnTabla == e.getSource()) {
+        /*if (marcoBsqueda.btnTabla == e.getSource()) {
             System.out.println("btn tabla");
-        }
+        }*/
 
     }
+
+
 }
 
