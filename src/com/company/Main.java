@@ -1,8 +1,5 @@
 package com.company;
-import com.company.modelo.Cancion;
-import com.company.modelo.Lista;
-import com.company.modelo.Reproductor;
-import com.company.modelo.UserData;
+import com.company.modelo.*;
 import com.company.view.MarcoBusqueda;
 import com.company.view.MarcoPrincipal;
 
