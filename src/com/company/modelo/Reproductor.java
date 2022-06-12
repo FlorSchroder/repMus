@@ -52,15 +52,15 @@ public class Reproductor {
         if (!listas.isEmpty()){
             for (int i = 0; i < listas.size(); i++) {
                 if (nombre.equalsIgnoreCase(listas.get(i).getNombre())){
-                    System.out.println("Se ha encontrado la lista!");
+                 //   System.out.println("Se ha encontrado la lista!");
                     return listas.get(i);
                 }else {
-                    System.out.println("No esxiste una lista con ese nombre en el reproductor");
+                   // System.out.println("No esxiste una lista con ese nombre en el reproductor");
                     return null;
                 }
             }
         }else {
-            System.out.println("No hay listas en este reproductor");
+           // System.out.println("No hay listas en este reproductor");
         }
         return null;
     }

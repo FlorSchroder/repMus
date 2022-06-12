@@ -1,5 +1,6 @@
 package com.company.controller;
 
+import com.company.modelo.Lista;
 import com.company.modelo.Reproductor;
 import com.company.view.MarcoBusqueda;
 
@@ -24,11 +25,13 @@ public class DriverMarcoBusqueda implements ActionListener {
             marcoBsqueda.setVisible(false);
         }
         if (marcoBsqueda.btnBuscar == e.getSource()) {
-            try {
-                System.out.println(marcoBsqueda.getReproductor().buscar(marcoBsqueda.textBusqueda.getText()));
-            }catch (Exception t){
-                System.out.println("No hay canciones en la lista");
-            }
+            Lista lista = marcoBsqueda.getReproductor().getListaSonando().BuscarPor( "nombre",marcoBsqueda.textBusqueda.getText());
+           if (lista == null) {
+               System.out.println("No existe la cancion");
+           }
+        }
+        if (marcoBsqueda.btnTabla == e.getSource()) {
+            System.out.println("btn tabla");
         }
 
     }

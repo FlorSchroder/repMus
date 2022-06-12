@@ -44,7 +44,9 @@ public class MarcoBusqueda extends JFrame {
         //JTable tabla = new JTable(datosFila, datosColumna);
         ModeloDatos modeloDatos = new ModeloDatos();
         tabla = new JTable(modeloDatos);
-        tabla.getColumn("Acciones").setCellRenderer(new botonTabla());
+        btnTabla = new botonTabla();
+        btnTabla.addActionListener(new DriverMarcoBusqueda(this));
+        tabla.getColumn("Acciones").setCellRenderer(btnTabla);
         add(new JScrollPane(tabla), BorderLayout.CENTER);
 
         // PANEL INFERIOR //
@@ -84,6 +86,7 @@ public class MarcoBusqueda extends JFrame {
     public JTextField textBusqueda;
     public JTable tabla;
     public JLabel nombreCancion;
+    public botonTabla btnTabla;
 
     class ModeloDatos extends AbstractTableModel {
         int altura = 0;
@@ -133,9 +136,6 @@ public class MarcoBusqueda extends JFrame {
                 case 2:
                     cancion.getGenero();
                     break;
-                //case 3:
-                    //btnVolver;
-                //    break;
             }
         }
 
@@ -154,7 +154,7 @@ public class MarcoBusqueda extends JFrame {
                 case 2:
                     return cancion.getGenero();
                // case 3:
-                    //return new JButton("agregar");
+                   // return btnTabla;
             }
             return null;
         }
