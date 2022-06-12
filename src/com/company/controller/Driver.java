@@ -13,10 +13,6 @@ public class Driver implements ActionListener {
     }
     public Reproductor reproductor = new Reproductor();
 
-    public Driver(MarcoBusqueda marcob){
-        this.marcob = marcob;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (marco.b1 == e.getSource()){
