@@ -1,6 +1,7 @@
 package com.company.view;
 
 import com.company.controller.DriverMarcoBusqueda;
+import com.company.modelo.Reproductor;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -8,9 +9,13 @@ import java.awt.*;
 
 public class MarcoBusqueda extends JFrame {
     private MarcoPrincipal marcoPrincipal;
+    private Reproductor reproductor;
+    private String nombre;
 
-    public MarcoBusqueda(MarcoPrincipal marcoPrincipal){
+    public MarcoBusqueda(MarcoPrincipal marcoPrincipal, String nombre, Reproductor reproductor){
         this.marcoPrincipal = marcoPrincipal;
+        this.reproductor = reproductor;
+        this.nombre = nombre;
 
         setBounds(500,300,800,400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,9 +23,9 @@ public class MarcoBusqueda extends JFrame {
 
         JPanel panelBusqueda = new JPanel();
         panelBusqueda.setLayout(new FlowLayout());
-        JLabel labelBusqueda = new JLabel("Resultados para: [Busqueda]");
+        labelBusqueda = new JLabel("Resultados para: " + nombre);
         panelBusqueda.add(labelBusqueda);
-        JTextField textBusqueda = new JTextField();
+        textBusqueda = new JTextField();
         textBusqueda.setColumns(25);
         btnBuscar = new JButton("Buscar");
         btnBuscar.addActionListener(new DriverMarcoBusqueda(this));
@@ -65,12 +70,18 @@ public class MarcoBusqueda extends JFrame {
     }
     public JButton btnBuscar;
     public JButton btnVolver;
+    public JLabel labelBusqueda;
+    public JTextField textBusqueda;
 
     class ModeloDatos extends AbstractTableModel {
 
         @Override
         public int getRowCount() {
-            return 8;
+            int altura = 0;
+            if (reproductor.listaExiste(nombre)){
+                altura = reproductor.buscar(nombre).getSize();
+            }
+            return altura;
         }
 
         @Override
@@ -104,5 +115,13 @@ public class MarcoBusqueda extends JFrame {
 
     public void setMarcoPrincipal(MarcoPrincipal marcoPrincipal) {
         this.marcoPrincipal = marcoPrincipal;
+    }
+
+    public Reproductor getReproductor() {
+        return reproductor;
+    }
+
+    public void setReproductor(Reproductor reproductor) {
+        this.reproductor = reproductor;
     }
 }
