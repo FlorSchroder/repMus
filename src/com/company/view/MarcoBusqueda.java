@@ -6,6 +6,7 @@ import com.company.modelo.Reproductor;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class MarcoBusqueda extends JFrame {
@@ -43,6 +44,7 @@ public class MarcoBusqueda extends JFrame {
         //JTable tabla = new JTable(datosFila, datosColumna);
         ModeloDatos modeloDatos = new ModeloDatos();
         tabla = new JTable(modeloDatos);
+        tabla.getColumn("Acciones").setCellRenderer(new botonTabla());
         add(new JScrollPane(tabla), BorderLayout.CENTER);
 
         // PANEL INFERIOR //
@@ -131,9 +133,9 @@ public class MarcoBusqueda extends JFrame {
                 case 2:
                     cancion.getGenero();
                     break;
-                case 3:
+                //case 3:
                     //btnVolver;
-                    break;
+                //    break;
             }
         }
 
@@ -151,10 +153,30 @@ public class MarcoBusqueda extends JFrame {
                     return cancion.getArtista();
                 case 2:
                     return cancion.getGenero();
-                case 3:
-                    return new JButton("agregar");
+               // case 3:
+                    //return new JButton("agregar");
             }
             return null;
+        }
+    }
+
+    class botonTabla extends JButton implements TableCellRenderer {
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            if (value != null) {
+                setText("");
+            } else {
+                setText("Descargar");
+            }
+            if (isSelected) {
+                setForeground(table.getSelectionForeground());
+                setBackground(table.getSelectionBackground());
+            } else {
+                setForeground(table.getForeground());
+                setBackground(UIManager.getColor("Button.background"));
+            }
+            return this;
         }
     }
 
