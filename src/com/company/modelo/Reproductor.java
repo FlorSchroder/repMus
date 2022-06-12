@@ -1,5 +1,6 @@
 package com.company.modelo;
 
+import com.company.Main;
 import com.company.modelo.Cancion;
 import com.company.modelo.Lista;
 
@@ -38,9 +39,12 @@ public class Reproductor {
             }
     }
 
-    public void play(Cancion cancion){
-        //hay que ver como hacer
+    public void play(Cancion cancion, UserData usr){
         this.cancion = cancion;
+        usr.addVeces("genero", cancion.getGenero());
+        usr.addVeces("artista", cancion.getArtista());
+        usr.addVeces("favoritos", cancion.getNombre());
+        usr.addVeces("escuchados", cancion.getNombre());
     }
 
     public void siguiente(Cancion cancion){
@@ -88,6 +92,7 @@ public class Reproductor {
         Cancion c13 = new Cancion("Cuatro Veinte", "Cachengue", "Emilia", 192);
         Cancion c14 = new Cancion("Salimo de Noche", "Cachengue", "Tiago PZK", 167);
         Cancion c15 = new Cancion("Plan A", "Cachengue", "Paulo Londra", 187);
+        Cancion c16 = new Cancion("Cancion Lenta", "R&B", "Paco Oloroso", 187);
         cancionesRepMus.addCanciones(c0);
         cancionesRepMus.addCanciones(c1);
         cancionesRepMus.addCanciones(c2);
@@ -104,5 +109,6 @@ public class Reproductor {
         cancionesRepMus.addCanciones(c13);
         cancionesRepMus.addCanciones(c14);
         cancionesRepMus.addCanciones(c15);
+        cancionesRepMus.addCanciones(c16);
     }
 }

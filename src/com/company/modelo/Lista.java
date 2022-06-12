@@ -84,7 +84,7 @@ public class Lista {
     }
 
     public Lista BuscarPor(String param, String valor){
-        Lista listaRes = null;
+        Lista listaRes = new Lista("Resultados");
         for (int i = 0; i<this.getSize(); i++){
             if (param.equals("nombre")){
                 Cancion c;

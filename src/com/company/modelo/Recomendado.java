@@ -2,9 +2,7 @@ package com.company.modelo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+
 
 public class Recomendado {
     UserData usr;
@@ -34,6 +32,10 @@ public class Recomendado {
         l2 = lista.BuscarPor("genero", genSug);
         c2 = l2.getCanciones().get((int)(Math.random()*l2.getSize()));
         artSug = c2.getArtista();
+        while (artSug.equals(artista)){
+            c2 = l2.getCanciones().get((int)(Math.random()*l2.getSize()));
+            artSug = c2.getArtista();
+        }
         return artSug;
 
     }
@@ -47,6 +49,7 @@ public class Recomendado {
         if (ldt.getHour() >= 20 || ldt.getHour() <=5){ // Noche
             if (diaSemana.equals("FRIDAY") || diaSemana.equals("SATURDAY")){ // Noche de rumbaaa
                 l1 = lista.BuscarPor("genero", "cachengue");
+
                 return l1;
             }else{
                 l1 = lista.BuscarPor("genero", "R&B");
