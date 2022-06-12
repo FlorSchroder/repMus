@@ -6,10 +6,10 @@ import com.company.view.MarcoPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DriverMarcoPrincipal implements ActionListener {
+public class Driver implements ActionListener {
     private MarcoPrincipal marco;
 
-    public DriverMarcoPrincipal(MarcoPrincipal marco){
+    public Driver(MarcoPrincipal marco){
         this.marco = marco;
     }
     public Reproductor reproductor = new Reproductor();
