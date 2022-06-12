@@ -1,10 +1,12 @@
 package com.company.view;
 
 import com.company.controller.DriverMarcoBusqueda;
+import com.company.modelo.Cancion;
 import com.company.modelo.Reproductor;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class MarcoBusqueda extends JFrame {
@@ -17,7 +19,7 @@ public class MarcoBusqueda extends JFrame {
         this.reproductor = reproductor;
         this.nombre = nombre;
 
-        setBounds(500,300,800,400);
+        setBounds(250,200,800,400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -41,16 +43,20 @@ public class MarcoBusqueda extends JFrame {
 
         //JTable tabla = new JTable(datosFila, datosColumna);
         ModeloDatos modeloDatos = new ModeloDatos();
-        JTable tabla = new JTable(modeloDatos);
+        tabla = new JTable(modeloDatos);
+        tabla.getColumn("Acciones").setCellRenderer(new botonTabla());
         add(new JScrollPane(tabla), BorderLayout.CENTER);
 
         // PANEL INFERIOR //
         JPanel panelInf = new JPanel();
         panelInf.setLayout(new GridLayout(2,1));
 
+
         JPanel panelProgress = new JPanel();
         panelProgress.setLayout(new FlowLayout());
         JSlider barra = new JSlider();
+        nombreCancion = new JLabel("Nombre: ");
+        panelProgress.add(nombreCancion);
 
         panelProgress.add(barra);
         panelInf.add(panelProgress);
@@ -76,12 +82,14 @@ public class MarcoBusqueda extends JFrame {
     public JButton btnVolver;
     public JLabel labelBusqueda;
     public JTextField textBusqueda;
+    public JTable tabla;
+    public JLabel nombreCancion;
 
     class ModeloDatos extends AbstractTableModel {
+        int altura = 0;
 
         @Override
         public int getRowCount() {
-            int altura = 0;
             if (reproductor.listaExiste(nombre)){
                 altura = reproductor.buscar(nombre).getSize();
             }
@@ -93,10 +101,6 @@ public class MarcoBusqueda extends JFrame {
             return 4;
         }
 
-        @Override
-        public Object getValueAt(int rowIndex, int columnIndex) {
-            return null;
-        }
         public String getColumnName(int n){
             switch (n){
                 case 0:
@@ -110,6 +114,69 @@ public class MarcoBusqueda extends JFrame {
                 default:
                     return "Null";
             }
+        }
+
+        @Override
+        public void setValueAt (Object aValue, int rowIndex, int columnIndex){
+            Cancion cancion = new Cancion();
+            if (reproductor.listaExiste(nombre)){
+                cancion = reproductor.buscar(nombre).getCanciones().get(rowIndex);
+            }
+
+            switch (columnIndex){
+                case 0:
+                    cancion.getGenero();
+                    break;
+                case 1:
+                    cancion.getArtista();
+                    break;
+                case 2:
+                    cancion.getGenero();
+                    break;
+                //case 3:
+                    //btnVolver;
+                //    break;
+            }
+        }
+
+        @Override
+        public Object getValueAt (int rowIndex, int columnIndex){
+            Cancion cancion = new Cancion();
+            if (reproductor.listaExiste(nombre)){
+                cancion = reproductor.buscar(nombre).getCanciones().get(rowIndex);
+            }
+
+            switch (columnIndex){
+                case 0:
+                    return cancion.getNombre();
+                case 1:
+                    return cancion.getArtista();
+                case 2:
+                    return cancion.getGenero();
+               // case 3:
+                    //return new JButton("agregar");
+            }
+            return null;
+        }
+    }
+
+    class botonTabla extends JButton implements TableCellRenderer {
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            if (value != null) {
+                setText("");
+            } else {
+                setText("Descargar");
+            }
+            if (isSelected) {
+                setForeground(table.getSelectionForeground());
+                setBackground(table.getSelectionBackground());
+            } else {
+                setForeground(table.getForeground());
+                setBackground(UIManager.getColor("Button.background"));
+            }
+            return this;
         }
     }
 
@@ -128,4 +195,5 @@ public class MarcoBusqueda extends JFrame {
     public void setReproductor(Reproductor reproductor) {
         this.reproductor = reproductor;
     }
+
 }

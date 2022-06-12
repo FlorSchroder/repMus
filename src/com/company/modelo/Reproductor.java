@@ -65,7 +65,6 @@ public class Reproductor {
             }
         }else {
             System.out.println("No hay listas en este reproductor");
-            return null;
         }
         return null;
     }
