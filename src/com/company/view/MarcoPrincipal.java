@@ -9,7 +9,7 @@ public class MarcoPrincipal extends JFrame {
     public MarcoPrincipal(){
         setTitle("RepMus");
         setLayout(new BorderLayout());
-        setBounds(500,300,800,400);
+        setBounds(250,200,800,400);
         JPanel panel1 = new JPanel();
         panel1.setLayout(new GridLayout(3,3));
 
@@ -56,6 +56,8 @@ public class MarcoPrincipal extends JFrame {
 
         JPanel panelProgress = new JPanel();
         panelProgress.setLayout(new FlowLayout());
+        nombreCancion = new JLabel("Nombre: ");
+        panelProgress.add(nombreCancion);
         panelProgress.add(new JProgressBar());
         panelInf.add(panelProgress);
 
@@ -83,5 +85,6 @@ public class MarcoPrincipal extends JFrame {
 
     public JTextField textBusqueda;
     public JButton btnBuscar;
+    public JLabel nombreCancion;
 }
 
