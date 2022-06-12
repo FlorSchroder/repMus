@@ -1,5 +1,4 @@
 package com.company.controller;
-
 import com.company.modelo.Reproductor;
 import com.company.view.MarcoBusqueda;
 import com.company.view.MarcoPrincipal;
@@ -13,6 +12,10 @@ public class Driver implements ActionListener {
         this.marco = marco;
     }
     public Reproductor reproductor = new Reproductor();
+
+    public Driver(MarcoBusqueda marcob){
+        this.marcob = marcob;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -52,6 +55,7 @@ public class Driver implements ActionListener {
             }catch (Exception t){
                 System.out.println("No hay canciones en la lista");
             }
+
         }
     }
 }
