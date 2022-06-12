@@ -14,6 +14,7 @@ public class Reproductor {
     private UserData usr;
 
     public Reproductor(){
+        this.listaSonando = null;
 
     }
 
@@ -24,6 +25,14 @@ public class Reproductor {
     public void selectLista(Lista listaSonando){
         //hay que ver como hacer
         this.listaSonando = listaSonando;
+    }
+    public Lista getLista(){
+            if (listaSonando != null){
+                return listaSonando;
+            }else {
+                System.out.println("No se ha asignado ninguna lista de reproduccion a este reproductor");
+                return null;
+            }
     }
 
     public void play(Cancion cancion){
@@ -37,6 +46,12 @@ public class Reproductor {
     public void siguiente(Cancion cancion){
         //hay que ver como hacer
         listaSonando.getSiguienteCancion(cancion);
+    }
+
+    public String buscar (String cancion){
+        if (!listaSonando.getLista().isEmpty()){
+            return listaSonando.buscar(cancion);
+        }else { return  "No existe la cancion " + cancion; }
     }
 
 

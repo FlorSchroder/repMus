@@ -54,5 +54,32 @@ public class Lista {
         return c3;
     }
 
+    public int getSize(){
+        return canciones.size();
+    }
+
+    public ArrayList<Cancion> getLista(){
+        return canciones;
+    }
+
+    public String buscar (String cancion){
+        String c = null;
+        if (!canciones.isEmpty()){
+            for (int i = 0; i < canciones.size(); i++) {
+                if(cancion.equalsIgnoreCase(canciones.get(i).getNombre())){
+                    return canciones.get(i).getNombre();
+                }else { c = "No existe la cancion: " + cancion; }
+            }
+        }else {c = "La lista: " + this.nombre + " esta vacia";}
+        return c;
+    }
+
+    public void printCanciones(){
+        if (canciones.size() != 0)
+        for (int i = 0; i < canciones.size(); i++) {
+            System.out.println(canciones.get(i).getNombre());
+        }else{System.out.println("No hay canciones en esta lista de reproduccion");}
+    }
+
 
 }
