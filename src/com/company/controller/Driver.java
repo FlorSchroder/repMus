@@ -1,13 +1,19 @@
 package com.company.controller;
 
+import com.company.view.MarcoBusqueda;
 import com.company.view.MarcoPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Driver implements ActionListener {
     private MarcoPrincipal marco;
+    private MarcoBusqueda marcob;
     public Driver(MarcoPrincipal marco){
         this.marco = marco;
+    }
+
+    public Driver(MarcoBusqueda marcob){
+        this.marcob = marcob;
     }
 
     @Override
@@ -31,7 +37,14 @@ public class Driver implements ActionListener {
             System.out.println("boton b6");
         }
         if (marco.btnBuscar == e.getSource()){
-            System.out.println(marco.textBusqueda.getText());
+            MarcoBusqueda mb = new MarcoBusqueda();
+            marcob = mb;
+            marcob.setVisible(true);
+            marco.setVisible(false);
+        }
+        if (marcob.btnVolver == e.getSource()){
+            marcob.dispose();
+            marco.setVisible(true);
         }
     }
 }
