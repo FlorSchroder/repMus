@@ -73,8 +73,6 @@ public class MarcoPrincipal extends JFrame {
 
         // FIN PANEL INFERIOR //
 
-
-
     }
     public JButton b1;
     public JButton b2;

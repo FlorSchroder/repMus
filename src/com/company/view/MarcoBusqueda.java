@@ -27,10 +27,12 @@ public class MarcoBusqueda extends JFrame {
         panelBusqueda.add(labelBusqueda);
         textBusqueda = new JTextField();
         textBusqueda.setColumns(25);
+
         btnBuscar = new JButton("Buscar");
         btnBuscar.addActionListener(new DriverMarcoBusqueda(this));
         btnVolver = new JButton("Volver");
         btnVolver.addActionListener(new DriverMarcoBusqueda(this));
+
         panelBusqueda.add(textBusqueda);
         panelBusqueda.add(btnBuscar);
         panelBusqueda.add(btnVolver);
@@ -68,7 +70,9 @@ public class MarcoBusqueda extends JFrame {
         // FIN PANEL INFERIOR //
 
     }
+
     public JButton btnBuscar;
+
     public JButton btnVolver;
     public JLabel labelBusqueda;
     public JTextField textBusqueda;
