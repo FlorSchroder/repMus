@@ -32,7 +32,7 @@ public class UserData {
 
     }
 
-    public String getMasVeces(HashMap<String,Integer> mapa, String key){
+    public String getMasVeces(HashMap<String,Integer> mapa){
         Set<String> setClaves = mapa.keySet();
         int contador = 0;
         int aux;

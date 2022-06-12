@@ -1,5 +1,7 @@
 package com.company.view;
 
+import com.company.controller.Driver;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
@@ -17,7 +19,8 @@ public class MarcoBusqueda extends JFrame {
         JTextField textBusqueda = new JTextField();
         textBusqueda.setColumns(25);
         JButton btnBuscar = new JButton("Buscar");
-        JButton btnVolver = new JButton("Volver");
+        btnVolver = new JButton("Volver");
+        btnVolver.addActionListener(new Driver(this));
         panelBusqueda.add(textBusqueda);
         panelBusqueda.add(btnBuscar);
         panelBusqueda.add(btnVolver);
@@ -55,6 +58,7 @@ public class MarcoBusqueda extends JFrame {
         // FIN PANEL INFERIOR //
 
     }
+    public JButton btnVolver;
 
     class ModeloDatos extends AbstractTableModel {
 

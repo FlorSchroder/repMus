@@ -11,9 +11,14 @@ public class Reproductor {
     private ArrayList<Cancion> canciones;
     private Cancion cancion;
     private Lista listaSonando;
+    private UserData usr;
 
     public Reproductor(){
 
+    }
+
+    public Reproductor(UserData usr){
+        this.usr = usr;
     }
 
     public void selectLista(Lista listaSonando){
@@ -24,6 +29,9 @@ public class Reproductor {
     public void play(Cancion cancion){
         //hay que ver como hacer
         this.cancion = cancion;
+        usr.addVeces(usr.Escuchados,cancion.getNombre());
+        usr.addVeces(usr.Artista,cancion.getArtista());
+        usr.addVeces(usr.Genero,cancion.getGenero());
     }
 
     public void siguiente(Cancion cancion){
