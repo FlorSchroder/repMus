@@ -1,6 +1,6 @@
 package com.company.view;
 
-import com.company.controller.Driver;
+import com.company.controller.DriverMarcoPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,9 +18,9 @@ public class MarcoPrincipal extends JFrame {
         panelSup.setLayout(new FlowLayout());
         textBusqueda = new JTextField();
         textBusqueda.setColumns(50);
-        textBusqueda.addActionListener(new Driver(this));
+        textBusqueda.addActionListener(new DriverMarcoPrincipal(this));
         btnBuscar = new JButton("Buscar");
-        btnBuscar.addActionListener(new Driver(this));
+        btnBuscar.addActionListener(new DriverMarcoPrincipal(this));
         panelSup.add(textBusqueda);
         panelSup.add(btnBuscar);
         add(panelSup, BorderLayout.NORTH);
@@ -34,12 +34,12 @@ public class MarcoPrincipal extends JFrame {
         b5 = new JButton("Descargas");
         b6 = new JButton("Mi lista");
 
-        b1.addActionListener(new Driver(this));
-        b2.addActionListener(new Driver(this));
-        b3.addActionListener(new Driver(this));
-        b4.addActionListener(new Driver(this));
-        b5.addActionListener(new Driver(this));
-        b6.addActionListener(new Driver(this));
+        b1.addActionListener(new DriverMarcoPrincipal(this));
+        b2.addActionListener(new DriverMarcoPrincipal(this));
+        b3.addActionListener(new DriverMarcoPrincipal(this));
+        b4.addActionListener(new DriverMarcoPrincipal(this));
+        b5.addActionListener(new DriverMarcoPrincipal(this));
+        b6.addActionListener(new DriverMarcoPrincipal(this));
 
         panel1.add(b1);
         panel1.add(b2);

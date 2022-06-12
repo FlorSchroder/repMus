@@ -1,11 +1,17 @@
 package com.company.view;
 
+import com.company.controller.DriverMarcoBusqueda;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 
 public class MarcoBusqueda extends JFrame {
-    public MarcoBusqueda(){
+    private MarcoPrincipal marcoPrincipal;
+
+    public MarcoBusqueda(MarcoPrincipal marcoPrincipal){
+        this.marcoPrincipal = marcoPrincipal;
+
         setBounds(500,300,800,400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -16,8 +22,10 @@ public class MarcoBusqueda extends JFrame {
         panelBusqueda.add(labelBusqueda);
         JTextField textBusqueda = new JTextField();
         textBusqueda.setColumns(25);
-        JButton btnBuscar = new JButton("Buscar");
-        JButton btnVolver = new JButton("Volver");
+        btnBuscar = new JButton("Buscar");
+        btnBuscar.addActionListener(new DriverMarcoBusqueda(this));
+        btnVolver = new JButton("Volver");
+        btnVolver.addActionListener(new DriverMarcoBusqueda(this));
         panelBusqueda.add(textBusqueda);
         panelBusqueda.add(btnBuscar);
         panelBusqueda.add(btnVolver);
@@ -55,6 +63,8 @@ public class MarcoBusqueda extends JFrame {
         // FIN PANEL INFERIOR //
 
     }
+    public JButton btnBuscar;
+    public JButton btnVolver;
 
     class ModeloDatos extends AbstractTableModel {
 
@@ -88,5 +98,11 @@ public class MarcoBusqueda extends JFrame {
         }
     }
 
+    public MarcoPrincipal getMarcoPrincipal() {
+        return marcoPrincipal;
+    }
 
+    public void setMarcoPrincipal(MarcoPrincipal marcoPrincipal) {
+        this.marcoPrincipal = marcoPrincipal;
+    }
 }
