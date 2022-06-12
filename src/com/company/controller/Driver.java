@@ -13,39 +13,35 @@ public class Driver implements ActionListener {
     }
     public Reproductor reproductor = new Reproductor();
 
-    public Driver(MarcoBusqueda marcob){
-        this.marcob = marcob;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (marco.b1 == e.getSource()){
-            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco);
+            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Nuevo Artista", reproductor);
             marcoBsqueda.setVisible(true);
             marco.setVisible(false);
         }
         if (marco.b2 == e.getSource()){
-            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco);
+            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Dia Chill", reproductor);
             marcoBsqueda.setVisible(true);
             marco.setVisible(false);
         }
         if (marco.b3 == e.getSource()){
-            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco);
+            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Para Salir", reproductor);
             marcoBsqueda.setVisible(true);
             marco.setVisible(false);
         }
         if (marco.b4 == e.getSource()){
-            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco);
+            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Mis Me Gusta", reproductor);
             marcoBsqueda.setVisible(true);
             marco.setVisible(false);
         }
         if (marco.b5 == e.getSource()){
-            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco);
+            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Nueva Lista", reproductor);
             marcoBsqueda.setVisible(true);
             marco.setVisible(false);
         }
         if (marco.b6 == e.getSource()){
-            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco);
+            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Canciones RepMus", reproductor);
             marcoBsqueda.setVisible(true);
             marco.setVisible(false);
         }

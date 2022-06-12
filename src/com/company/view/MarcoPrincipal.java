@@ -31,8 +31,8 @@ public class MarcoPrincipal extends JFrame {
         b2 = new JButton("[Día]");
         b3 = new JButton("[Noche]");
         b4 = new JButton("Me gusta");
-        b5 = new JButton("Descargas");
-        b6 = new JButton("Mi lista");
+        b5 = new JButton("Mi lista");
+        b6 = new JButton("Canciones RepMus");
 
         b1.addActionListener(new Driver(this));
         b2.addActionListener(new Driver(this));
