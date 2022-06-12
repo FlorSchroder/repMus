@@ -1,8 +1,5 @@
 package com.company;
-import com.company.modelo.Cancion;
-import com.company.modelo.Lista;
-import com.company.modelo.Reproductor;
-import com.company.modelo.UserData;
+import com.company.modelo.*;
 import com.company.view.MarcoBusqueda;
 import com.company.view.MarcoPrincipal;
 
@@ -15,10 +12,16 @@ public class Main {
         MarcoPrincipal m1 = new MarcoPrincipal();
         m1.setVisible(true);
         m1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        usr.addVeces("artista", "Arctic Monkeys");
+
 
         Reproductor reproductor = new Reproductor();
-
-        reproductor.buscar("canciones repmus").printCanciones();
+        Lista l;
+        Lista l2;
+        l = reproductor.buscar("canciones repmus");
+        Recomendado recomendado = new Recomendado(usr,l);
+        System.out.println(recomendado.recomendarArtista(l));
+        //l2.printCanciones();
 
     }
 }
