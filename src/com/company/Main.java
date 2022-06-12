@@ -7,6 +7,7 @@ import com.company.view.MarcoBusqueda;
 import com.company.view.MarcoPrincipal;
 
 import javax.swing.*;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
@@ -52,5 +53,11 @@ public class Main {
         cancionesRepMus.addCanciones(c13);
         cancionesRepMus.addCanciones(c14);
         cancionesRepMus.addCanciones(c15);
+        LocalDate ld = LocalDate.now();
+
+        System.out.println(ld.getDayOfWeek());
+        if (ld.getDayOfWeek().equals("SUNDAY")){
+            System.out.println("VERDAD");
+        }
     }
 }
