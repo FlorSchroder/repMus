@@ -3,6 +3,8 @@ package com.company.modelo;
 import com.company.modelo.Cancion;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class Lista {
     private String nombre;
@@ -80,6 +82,43 @@ public class Lista {
             System.out.println(canciones.get(i).getNombre());
         }else{System.out.println("No hay canciones en esta lista de reproduccion");}
     }
+
+    public Lista BuscarPor(String param, String valor){
+        Lista listaRes = null;
+        for (int i = 0; i<this.getSize(); i++){
+            if (param.equals("nombre")){
+                Cancion c;
+                String nom;
+                c = this.canciones.get(i);
+                nom = c.getNombre();
+                if (nom.equalsIgnoreCase(valor)){
+                    listaRes.addCanciones(c);
+                }
+
+            }else if (param.equals("genero")){
+                Cancion c;
+                String gen;
+                c = this.canciones.get(i);
+                gen = c.getGenero();
+                if (gen.equalsIgnoreCase(valor)){
+                    listaRes.addCanciones(c);
+                }
+
+            }else if (param.equals("artista")){
+                Cancion c;
+                String art;
+                c = this.canciones.get(i);
+                art = c.getArtista();
+                if (art.equalsIgnoreCase(valor)){
+                    listaRes.addCanciones(c);
+                }
+            }
+        }
+
+        return listaRes;
+    }
+
+
 
 
 }
