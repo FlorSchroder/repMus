@@ -9,6 +9,7 @@ import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class DriverMarcoBusqueda implements ActionListener {
     private MarcoBusqueda marcoBsqueda;
@@ -29,13 +30,11 @@ public class DriverMarcoBusqueda implements ActionListener {
         }
         if (marcoBsqueda.btnBuscar == e.getSource()) {
             Lista lista = marcoBsqueda.getReproductor().getListaSonando().BuscarPor( "nombre",marcoBsqueda.textBusqueda.getText());
+
            if (lista == null) {
                System.out.println("No existe la cancion");
            }
         }
-        /*if (marcoBsqueda.btnTabla == e.getSource()) {
-            System.out.println("btn tabla");
-        }*/
 
     }
 

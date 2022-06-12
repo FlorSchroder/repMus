@@ -13,6 +13,7 @@ public class Reproductor {
     private Lista listaSonando;
     private ArrayList<Lista> listas;
     private Lista cancionesRepMus;
+    public Object Data[][];
 
     public Reproductor(){
         this.listaSonando = null;
@@ -73,6 +74,26 @@ public class Reproductor {
         if (buscar(nombre) != null){
             return true;
         }else{ return false; }
+    }
+
+    public Object[][] getData(Lista lista){
+        this.selectListaSonando(this.buscar("canciones Repmus"));
+        lista = this.buscar("canciones Repmus");
+        //this.reproductor.Data[][];
+        this.Data = new Object[lista.getSize()][3];
+        for (int i=0; i < lista.getSize(); i++){
+            for (int j=0; j < 3; j++){
+                if (j==0){
+                    this.Data[i][j] = lista.getCanciones().get(i).getNombre();
+                }else if (j==1){
+                    this.Data[i][j] = lista.getCanciones().get(i).getArtista();
+                }else if (j==2){
+                    this.Data[i][j] = lista.getCanciones().get(i).getGenero();
+                }
+
+            }
+        }
+        return Data;
     }
 
     private void ndea(){
