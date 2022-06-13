@@ -47,7 +47,7 @@ public class MarcoBusqueda extends JFrame {
 
         //tabla = new JTable(modeloDatos);
         DefaultTableModel dm = new DefaultTableModel();
-        dm.setDataVector(this.reproductor.getData(reproductor.buscar("canciones Repmus")), new Object[]{"Nombre", "Artista", "Genero", "Descargar", "Reproducir"});
+        dm.setDataVector(this.reproductor.getData(reproductor), new Object[]{"Nombre", "Artista", "Genero", "Descargar", "Reproducir"});
         tabla = new JTable(dm);
 
         //modeloDatos.addTableModelListener(new DriverTabla());
@@ -138,12 +138,13 @@ public class MarcoBusqueda extends JFrame {
                 setBackground(UIManager.getColor("Button.background"));
             }
 
-           if (reproductor.getListaSonando().getCanciones().get(row).isDescargado()){
-               setIcon(downloaded);
-           } else {
-               setIcon(download);
-           }
-
+            if (reproductor.getListaSonando() != null){
+                if (reproductor.getListaSonando().getCanciones().get(row).isDescargado()){
+                    setIcon(downloaded);
+                } else {
+                    setIcon(download);
+                }
+            }
 
             return this;
         }
@@ -192,23 +193,23 @@ public class MarcoBusqueda extends JFrame {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    //fireEditingStopped();
                     System.out.println(tabla.getSelectedRow());
                     if (reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()).isDescargado()){
 
                         //JOptionPane.showMessageDialog(button, "Eliminado!");
-                        reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()).setDescargado(false); // ACAAA
+                        reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()).setDescargado(false);
+                        //reproductor.eliminarCancion(reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()));// ACAAA
 
                     }else {
                         reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()).setDescargado(true);
-
-
+                        //reproductor.descargarCancion(reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()));
                         //JOptionPane.showMessageDialog(button, "Descargado!");
 
                     }
 
                 }
             });
+
             if (reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).isDescargado()){
 
                 button.setIcon(download);
@@ -216,7 +217,6 @@ public class MarcoBusqueda extends JFrame {
 
                 button.setIcon(downloaded);
             }
-
         }
 
         @Override
@@ -285,12 +285,15 @@ public class MarcoBusqueda extends JFrame {
 
                 }
             });
+
             if (reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).isPlaying()){
 
                 button.setIcon(play);
             }else {
                 button.setIcon(pause);
             }
+
+
 
         }
 
