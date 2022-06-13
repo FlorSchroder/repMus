@@ -14,6 +14,8 @@ public class Reproductor {
     private ArrayList<Lista> listas;
     private Lista cancionesRepMus;
     public Object Data[][];
+    private boolean isOnPlay;
+    private UserData usr = new UserData();
 
     public Reproductor(){
         this.listaSonando = null;
@@ -21,6 +23,7 @@ public class Reproductor {
         ndea();
         listas = new ArrayList<>();
         listas.add(cancionesRepMus);
+        usr = new UserData();
     }
 
     public void addLista(Lista listaNueva){
@@ -42,15 +45,20 @@ public class Reproductor {
 
     public void play(Cancion cancion, UserData usr){
         this.cancion = cancion;
+        cancion.setPlaying(true);
         usr.addVeces("genero", cancion.getGenero());
         usr.addVeces("artista", cancion.getArtista());
         usr.addVeces("favoritos", cancion.getNombre());
         usr.addVeces("escuchados", cancion.getNombre());
     }
 
-    public void siguiente(Cancion cancion){
-        //hay que ver como hacer
-        listaSonando.getSiguienteCancion(cancion);
+    public void stop(Cancion cancion){
+        this.cancion = cancion;
+        cancion.setPlaying(false);
+    }
+
+    public void siguiente(Cancion cancion, UserData usr){
+        play(listaSonando.getSiguienteCancion(cancion), usr);
     }
 
     public Lista buscar (String nombre){
@@ -79,10 +87,9 @@ public class Reproductor {
     public Object[][] getData(Lista lista){
         this.selectListaSonando(this.buscar("canciones Repmus"));
         lista = this.buscar("canciones Repmus");
-        //this.reproductor.Data[][];
-        this.Data = new Object[lista.getSize()][3];
+        this.Data = new Object[lista.getSize()][4];
         for (int i=0; i < lista.getSize(); i++){
-            for (int j=0; j < 3; j++){
+            for (int j=0; j < 4; j++){
                 if (j==0){
                     this.Data[i][j] = lista.getCanciones().get(i).getNombre();
                 }else if (j==1){
@@ -90,26 +97,51 @@ public class Reproductor {
                 }else if (j==2){
                     this.Data[i][j] = lista.getCanciones().get(i).getGenero();
                 }
+                else if (j==3){
+                    this.Data[i][j] = lista.getCanciones().get(i).isDescargado();
+                }
 
             }
         }
         return Data;
     }
 
-    public Object getObjeto (){
-        Object data[][] = new Object[cancionesRepMus.getSize()][3];
-        for (int i=0; i < cancionesRepMus.getSize(); i++){
-            for (int j=0; j < 3; j++){
-                if (j==0){
-                    data[i][j] = cancionesRepMus.getCanciones().get(i).getNombre();
-                }else if (j==1){
-                    data[i][j] = cancionesRepMus.getCanciones().get(i).getArtista();
-                }else if (j==2){
-                    data[i][j] = cancionesRepMus.getCanciones().get(i).getGenero();
-                }
+
+
+    public boolean isOnPlay(){
+        for (int i=0; i < listaSonando.getCanciones().size(); i++){
+            if(listaSonando.getCanciones().get(i).isPlaying()){
+                return true;
             }
         }
-        return data;
+        return false;
+    }
+
+    public Cancion songOnPlay(){
+        if (this.isOnPlay()){
+            for (int i=0; i < listaSonando.getCanciones().size(); i++){
+                if(listaSonando.getCanciones().get(i).isPlaying()){
+                    return listaSonando.getCanciones().get(i);
+                }
+            }
+        }else {
+            return null;
+        }
+        return null;
+    }
+
+    public int getProgreso(){
+        int duracion;
+        int progreso;
+        duracion = this.songOnPlay().getDuracion();
+        progreso = (int) (duracion/100);
+        return progreso;
+
+    }
+
+    public UserData getUsr(){
+        return usr;
+
     }
 
     private void ndea(){

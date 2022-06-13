@@ -5,14 +5,12 @@ import java.time.LocalDateTime;
 
 
 public class Recomendado {
-    UserData usr;
-    Lista lista;
-    public Recomendado(UserData usr, Lista lista){
-        this.usr = usr;
-        this.lista = lista;
+
+    public Recomendado(){
+
     }
 
-    public String recomendarArtista(Lista lista){ //porque escuchaste [artista 1] ... [artista 2]
+    public String recomendarArtista(Lista lista, UserData usr){ //porque escuchaste [artista 1] ... [artista 2]
         String artista = usr.getMasVeces(usr.Artista);
         String ArtRec;
         ArtRec = buscarRelacionado(lista, artista);
