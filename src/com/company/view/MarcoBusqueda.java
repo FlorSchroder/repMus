@@ -230,6 +230,8 @@ public class MarcoBusqueda extends JFrame {
 
                 }else {
                     reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).setDescargado(true);
+                    System.out.println("Cancion: " +reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).getNombre());
+                    System.out.println("x = " +this.getComponent().getX());
                     JOptionPane.showMessageDialog(button, "Descargado!");
 
                 }
