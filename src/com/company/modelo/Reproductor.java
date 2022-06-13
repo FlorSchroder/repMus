@@ -96,6 +96,22 @@ public class Reproductor {
         return Data;
     }
 
+    public Object getObjeto (){
+        Object data[][] = new Object[cancionesRepMus.getSize()][3];
+        for (int i=0; i < cancionesRepMus.getSize(); i++){
+            for (int j=0; j < 3; j++){
+                if (j==0){
+                    data[i][j] = cancionesRepMus.getCanciones().get(i).getNombre();
+                }else if (j==1){
+                    data[i][j] = cancionesRepMus.getCanciones().get(i).getArtista();
+                }else if (j==2){
+                    data[i][j] = cancionesRepMus.getCanciones().get(i).getGenero();
+                }
+            }
+        }
+        return data;
+    }
+
     private void ndea(){
         Cancion c0 = new Cancion("Puesto", "Indie", "Babasonicos", 205);
         Cancion c1 = new Cancion("Jugo", "Indie", "Los Espiritus", 240);
