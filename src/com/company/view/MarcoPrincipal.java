@@ -1,11 +1,13 @@
 package com.company.view;
 
 import com.company.controller.Driver;
+import com.company.modelo.UserData;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MarcoPrincipal extends JFrame {
+
     public MarcoPrincipal(){
         setTitle("RepMus");
         setLayout(new BorderLayout());
@@ -27,12 +29,16 @@ public class MarcoPrincipal extends JFrame {
 
 
         // PANEL CENTRAL //
-        b1 = new JButton("Probá con [Artista]");
-        b2 = new JButton("[Día]");
-        b3 = new JButton("[Noche]");
+        b1 = new JButton("Probá con ...");
+        b2 = new JButton("...");
+        b3 = new JButton("Mis listas");
         b4 = new JButton("Me gusta");
-        b5 = new JButton("Mi lista");
+        b5 = new JButton("Limpiar datos");
         b6 = new JButton("Canciones RepMus");
+
+       /* if (usr.isEmptyArtist()){
+            b1.setEnabled(false);
+        }*/
 
         b1.addActionListener(new Driver(this));
         b2.addActionListener(new Driver(this));
@@ -86,5 +92,7 @@ public class MarcoPrincipal extends JFrame {
     public JTextField textBusqueda;
     public JButton btnBuscar;
     public JLabel nombreCancion;
+
 }
+
 

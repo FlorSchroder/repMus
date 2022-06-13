@@ -1,5 +1,8 @@
 package com.company.controller;
+import com.company.Main;
+import com.company.modelo.Lista;
 import com.company.modelo.Reproductor;
+import com.company.modelo.UserData;
 import com.company.view.MarcoBusqueda;
 import com.company.view.MarcoPrincipal;
 import java.awt.event.ActionEvent;
@@ -8,13 +11,23 @@ import java.awt.event.ActionListener;
 public class Driver implements ActionListener {
     private MarcoPrincipal marco;
 
+
     public Driver(MarcoPrincipal marco){
         this.marco = marco;
+
     }
     public Reproductor reproductor = new Reproductor();
 
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
+       /* if (!usr.isEmptyArtist()){
+            System.out.println("LLega");
+            marco.b1.setText("Probá con " + usr.getMasVeces(usr.getArtista()));
+            marco.b1.setEnabled(true);
+        }*/
+
         if (marco.b1 == e.getSource()){
             MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Nuevo Artista", reproductor);
             marcoBsqueda.setVisible(true);
@@ -42,6 +55,8 @@ public class Driver implements ActionListener {
         }
         if (marco.b6 == e.getSource()){
             MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Canciones RepMus", reproductor);
+            reproductor.selectListaSonando(reproductor.buscar("canciones Repmus"));
+
             marcoBsqueda.setVisible(true);
             marco.setVisible(false);
         }
@@ -54,6 +69,7 @@ public class Driver implements ActionListener {
 
         }
     }
+
 }
 
 

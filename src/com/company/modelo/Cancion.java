@@ -5,6 +5,10 @@ public class Cancion {
     private String nombre;
     private String genero;
     private String artista;
+    private boolean descargado;
+    private boolean isPlaying;
+
+
     private int duracion;
 
     public Cancion(){}
@@ -46,5 +50,21 @@ public class Cancion {
 
     public void setDuracion(int duracion) {
         this.duracion = duracion;
+    }
+
+    public boolean isDescargado() {
+        return descargado;
+    }
+
+    public void setDescargado(boolean descargado) {
+        this.descargado = descargado;
+    }
+
+    public boolean isPlaying() {
+        return isPlaying;
+    }
+
+    public void setPlaying(boolean isPlaying) {
+        this.isPlaying = isPlaying;
     }
 }
