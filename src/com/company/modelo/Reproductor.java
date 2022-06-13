@@ -1,9 +1,5 @@
 package com.company.modelo;
 
-import com.company.Main;
-import com.company.modelo.Cancion;
-import com.company.modelo.Lista;
-
 import java.util.ArrayList;
 
 public class Reproductor {
@@ -13,6 +9,7 @@ public class Reproductor {
     private Lista listaSonando;
     private ArrayList<Lista> listas;
     private Lista cancionesRepMus;
+    private Lista meGusta;
     public Object Data[][];
     private boolean isOnPlay;
     private UserData usr = new UserData();
@@ -20,10 +17,13 @@ public class Reproductor {
     public Reproductor(){
         this.listaSonando = null;
         cancionesRepMus = new Lista("Canciones RepMus" );
+        meGusta = new Lista("Me Gusta");
         ndea();
         listas = new ArrayList<>();
         listas.add(cancionesRepMus);
+        listas.add(meGusta);
         usr = new UserData();
+        listaSonando = new Lista("lista sonando");
     }
 
     public void addLista(Lista listaNueva){
@@ -31,7 +31,6 @@ public class Reproductor {
     }
 
     public void selectListaSonando(Lista listaSonando){
-        //hay que ver como hacer
         this.listaSonando = listaSonando;
     }
     public Lista getListaSonando(){
@@ -65,11 +64,10 @@ public class Reproductor {
         if (!listas.isEmpty()){
             for (int i = 0; i < listas.size(); i++) {
                 if (nombre.equalsIgnoreCase(listas.get(i).getNombre())){
-                 //   System.out.println("Se ha encontrado la lista!");
+                    System.out.println("Se ha encontrado la lista!");
                     return listas.get(i);
                 }else {
-                   // System.out.println("No esxiste una lista con ese nombre en el reproductor");
-                    return null;
+                    System.out.println("No esxiste una lista con ese nombre en el reproductor");
                 }
             }
         }else {
@@ -84,11 +82,11 @@ public class Reproductor {
         }else{ return false; }
     }
 
-    public Object[][] getData(Lista lista){
-        this.selectListaSonando(this.buscar("canciones Repmus"));
-        lista = this.buscar("canciones Repmus");
+    public Object[][] getData(Reproductor reproductor){
+        this.selectListaSonando(this.buscar(reproductor.getListaSonando().getNombre()));
+        Lista lista = this.buscar(reproductor.getListaSonando().getNombre());
         this.Data = new Object[lista.getSize()][4];
-        for (int i=0; i < lista.getSize(); i++){
+        for (int i = 0; i < lista.getSize(); i++){
             for (int j=0; j < 4; j++){
                 if (j==0){
                     this.Data[i][j] = lista.getCanciones().get(i).getNombre();
@@ -144,6 +142,13 @@ public class Reproductor {
 
     }
 
+    public void descargarCancion(Cancion c){
+        meGusta.addCanciones(c);
+    }
+    public void eliminarCancion(Cancion c){
+        meGusta.removeCancion(c);
+    }
+
     private void ndea(){
         Cancion c0 = new Cancion("Puesto", "Indie", "Babasonicos", 205);
         Cancion c1 = new Cancion("Jugo", "Indie", "Los Espiritus", 240);
@@ -179,5 +184,6 @@ public class Reproductor {
         cancionesRepMus.addCanciones(c14);
         cancionesRepMus.addCanciones(c15);
         cancionesRepMus.addCanciones(c16);
+        //meGusta.addCanciones(c0);
     }
 }
