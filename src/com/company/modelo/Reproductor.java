@@ -107,6 +107,7 @@ public class Reproductor {
     }
 
 
+
     public boolean isOnPlay(){
         for (int i=0; i < listaSonando.getCanciones().size(); i++){
             if(listaSonando.getCanciones().get(i).isPlaying()){
@@ -140,6 +141,7 @@ public class Reproductor {
 
     public UserData getUsr(){
         return usr;
+
     }
 
     private void ndea(){
