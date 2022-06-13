@@ -9,6 +9,7 @@ import java.util.Locale;
 public class Lista {
     private String nombre;
     private ArrayList<Cancion> canciones;
+    private boolean onPlay;
 
     public Lista(String nombre){
         this.nombre = nombre;
@@ -117,6 +118,8 @@ public class Lista {
         listaRes.printCanciones();
         return listaRes;
     }
+
+
 
 
 

@@ -9,6 +9,40 @@ public class UserData {
     HashMap<String,Integer> Favoritos;
     HashMap<String,Integer> Escuchados;
 
+    public HashMap<String, Integer> getGenero() {
+        return Genero;
+    }
+
+    public void setGenero(HashMap<String, Integer> genero) {
+        Genero = genero;
+    }
+
+    public HashMap<String, Integer> getArtista() {
+        return Artista;
+    }
+
+    public void setArtista(HashMap<String, Integer> artista) {
+        Artista = artista;
+    }
+
+    public HashMap<String, Integer> getFavoritos() {
+        return Favoritos;
+    }
+
+    public void setFavoritos(HashMap<String, Integer> favoritos) {
+        Favoritos = favoritos;
+    }
+
+    public HashMap<String, Integer> getEscuchados() {
+        return Escuchados;
+    }
+
+    public void setEscuchados(HashMap<String, Integer> escuchados) {
+        Escuchados = escuchados;
+    }
+
+
+
     public UserData(){
         Genero = new HashMap<>();
         Artista = new HashMap<>();
@@ -42,6 +76,7 @@ public class UserData {
                 } else {
                     this.Genero.put(key, 1);
                 }
+                break;
             case "artista":
                 if (this.Artista.containsKey(key)){
                     int valor;
@@ -51,6 +86,7 @@ public class UserData {
                 } else {
                     this.Artista.put(key, 1);
                 }
+                break;
             case "favoritos":
                 if (this.Favoritos.containsKey(key)){
                     int valor;
@@ -60,6 +96,7 @@ public class UserData {
                 } else {
                     this.Favoritos.put(key, 1);
                 }
+                break;
             case "escuchados":
                 if (this.Escuchados.containsKey(key)){
                     int valor;
@@ -69,6 +106,7 @@ public class UserData {
                 } else {
                     this.Escuchados.put(key, 1);
                 }
+                break;
         }
     }
 
@@ -85,6 +123,13 @@ public class UserData {
             }
         }
         return mayor;
+    }
+
+    public boolean isEmptyArtist(){
+        if(this.Artista.isEmpty()){
+            return true;
+        }
+        return false;
     }
 
 }

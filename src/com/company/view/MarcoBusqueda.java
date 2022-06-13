@@ -58,7 +58,7 @@ public class MarcoBusqueda extends JFrame {
         tabla.getColumn("Descargar").setCellRenderer(new ButtonRenderer());
         tabla.getColumn("Descargar").setCellEditor(new ButtonEditor(new JCheckBox()));
         tabla.getColumn("Reproducir").setCellRenderer(new ButtonRendererRep());
-        tabla.getColumn("Reproducir").setCellEditor(new ButtonEditor(new JCheckBox()));
+        tabla.getColumn("Reproducir").setCellEditor(new ButtonEditorRep(new JCheckBox()));
 
 
 
@@ -74,7 +74,17 @@ public class MarcoBusqueda extends JFrame {
 
         JPanel panelProgress = new JPanel();
         panelProgress.setLayout(new FlowLayout());
-        JSlider barra = new JSlider();
+        barra = new JProgressBar();
+        if(reproductor.isOnPlay()) {
+            for (int i = 0; i < reproductor.songOnPlay().getDuracion(); i++) {
+                barra.setValue(reproductor.getProgreso() + i);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         nombreCancion = new JLabel("Nombre: ");
         panelProgress.add(nombreCancion);
 
@@ -104,6 +114,7 @@ public class MarcoBusqueda extends JFrame {
     public JTextField textBusqueda;
     public JTable tabla;
     public JLabel nombreCancion;
+    public JProgressBar barra;
 
 
     class ButtonRenderer extends JButton implements TableCellRenderer {
@@ -112,9 +123,12 @@ public class MarcoBusqueda extends JFrame {
             setOpaque(true);
         }
 
+
+
         @Override
-        public Component getTableCellRendererComponent(JTable table, Object value,
-                                                       boolean isSelected, boolean hasFocus, int row, int column) {
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            ImageIcon downloaded = new ImageIcon("src/com/company/images/downloaded.png");
+            ImageIcon download = new ImageIcon("src/com/company/images/download.png");
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setBackground(table.getSelectionBackground());
@@ -122,14 +136,14 @@ public class MarcoBusqueda extends JFrame {
                 setForeground(table.getForeground());
                 setBackground(UIManager.getColor("Button.background"));
             }
-            ImageIcon downloaded = new ImageIcon("src/com/company/images/downloaded.png");
-            ImageIcon download = new ImageIcon("src/com/company/images/download.png");
 
-            if (value == null){
-                setIcon(download);
-            }else {
-                setIcon(downloaded);
-            }
+           if (reproductor.getListaSonando().getCanciones().get(row).isDescargado()){
+               setIcon(downloaded);
+           } else {
+               setIcon(download);
+           }
+
+
             return this;
         }
     }
@@ -141,8 +155,7 @@ public class MarcoBusqueda extends JFrame {
         }
 
         @Override
-        public Component getTableCellRendererComponent(JTable table, Object value,
-                                                       boolean isSelected, boolean hasFocus, int row, int column) {
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setBackground(table.getSelectionBackground());
@@ -166,7 +179,6 @@ public class MarcoBusqueda extends JFrame {
     class ButtonEditor extends DefaultCellEditor {
 
         protected JButton button;
-        private String label;
         private boolean isPushed;
 
         public ButtonEditor(JCheckBox checkBox) {
@@ -174,17 +186,27 @@ public class MarcoBusqueda extends JFrame {
             button = new JButton();
             button.setOpaque(true);
             button.setSize(20,20);
+            ImageIcon downloaded = new ImageIcon("src/com/company/images/downloaded.png");
+            ImageIcon download = new ImageIcon("src/com/company/images/download.png");
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     fireEditingStopped();
+
                 }
             });
+            if (reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).isDescargado()){
+                // ACAAA
+                button.setIcon(download);
+            }else {
+
+                button.setIcon(downloaded);
+            }
+
         }
 
         @Override
-        public Component getTableCellEditorComponent(JTable table, Object value,
-                                                     boolean isSelected, int row, int column) {
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             if (isSelected) {
                 button.setForeground(table.getSelectionForeground());
                 button.setBackground(table.getSelectionBackground());
@@ -192,8 +214,7 @@ public class MarcoBusqueda extends JFrame {
                 button.setForeground(table.getForeground());
                 button.setBackground(table.getBackground());
             }
-            label = (value == null) ? "" : value.toString();
-            button.setText(label);
+
             isPushed = true;
             return button;
         }
@@ -201,10 +222,20 @@ public class MarcoBusqueda extends JFrame {
         @Override
         public Object getCellEditorValue() {
             if (isPushed) {
-                JOptionPane.showMessageDialog(button, label + "Descargado!");
+
+                //System.out.println(reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).getNombre());
+                if (reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).isDescargado()){
+                    JOptionPane.showMessageDialog(button, "Eliminado!");
+                    reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).setDescargado(false); // ACAAA
+
+                }else {
+                    reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).setDescargado(true);
+                    JOptionPane.showMessageDialog(button, "Descargado!");
+
+                }
             }
             isPushed = false;
-            return label;
+            return null;
         }
 
         @Override
@@ -213,6 +244,89 @@ public class MarcoBusqueda extends JFrame {
             return super.stopCellEditing();
         }
     }
+
+    class ButtonEditorRep extends DefaultCellEditor {
+
+        protected JButton button;
+        private boolean isPushed;
+
+        public ButtonEditorRep(JCheckBox checkBox) {
+            super(checkBox);
+            button = new JButton();
+            button.setOpaque(true);
+            button.setSize(20,20);
+            ImageIcon play = new ImageIcon("src/com/company/images/play.png");
+            ImageIcon pause = new ImageIcon("src/com/company/images/pause.png");
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    fireEditingStopped();
+
+                }
+            });
+            if (reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).isPlaying()){
+
+                button.setIcon(play);
+            }else {
+                button.setIcon(pause);
+            }
+
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            if (isSelected) {
+                button.setForeground(table.getSelectionForeground());
+                button.setBackground(table.getSelectionBackground());
+            } else {
+                button.setForeground(table.getForeground());
+                button.setBackground(table.getBackground());
+            }
+
+            isPushed = true;
+            return button;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            if (isPushed) {
+                ImageIcon play = new ImageIcon("src/com/company/images/play.png");
+                ImageIcon pause = new ImageIcon("src/com/company/images/pause.png");
+
+                //System.out.println(reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).getNombre());
+                if (reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).isPlaying()){
+
+                    reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).setPlaying(false);
+
+                }else {
+                    if (reproductor.isOnPlay()){
+                        Cancion enRep;
+                        enRep = reproductor.songOnPlay();
+                        reproductor.stop(enRep);
+                        reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).setPlaying(true);
+                        reproductor.play(reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()), reproductor.getUsr());
+
+                    }else{
+                        reproductor.play(reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()), reproductor.getUsr());
+                        reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).setPlaying(true);
+                    }
+
+
+
+                }
+            }
+            isPushed = false;
+            return null;
+        }
+
+        @Override
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+    }
+
+
     public MarcoPrincipal getMarcoPrincipal() {
         return marcoPrincipal;
     }
