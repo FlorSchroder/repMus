@@ -62,6 +62,7 @@ public class MarcoBusqueda extends JFrame {
 
 
 
+
         //tabla.getColumn("Acciones").setCellRenderer(btnTabla2);
         tabla.setPreferredScrollableViewportSize(tabla.getPreferredSize());
 
@@ -108,7 +109,7 @@ public class MarcoBusqueda extends JFrame {
     }
 
     public JButton btnBuscar;
-
+    public JButton button;
     public JButton btnVolver;
     public JLabel labelBusqueda;
     public JTextField textBusqueda;
@@ -191,12 +192,25 @@ public class MarcoBusqueda extends JFrame {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    fireEditingStopped();
+                    //fireEditingStopped();
+                    System.out.println(tabla.getSelectedRow());
+                    if (reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()).isDescargado()){
+
+                        //JOptionPane.showMessageDialog(button, "Eliminado!");
+                        reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()).setDescargado(false); // ACAAA
+
+                    }else {
+                        reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()).setDescargado(true);
+
+
+                        //JOptionPane.showMessageDialog(button, "Descargado!");
+
+                    }
 
                 }
             });
             if (reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).isDescargado()){
-                // ACAAA
+
                 button.setIcon(download);
             }else {
 
@@ -223,16 +237,6 @@ public class MarcoBusqueda extends JFrame {
         public Object getCellEditorValue() {
             if (isPushed) {
 
-                //System.out.println(reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).getNombre());
-                if (reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).isDescargado()){
-                    JOptionPane.showMessageDialog(button, "Eliminado!");
-                    reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).setDescargado(false); // ACAAA
-
-                }else {
-                    reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).setDescargado(true);
-                    JOptionPane.showMessageDialog(button, "Descargado!");
-
-                }
             }
             isPushed = false;
             return null;
@@ -260,7 +264,24 @@ public class MarcoBusqueda extends JFrame {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    fireEditingStopped();
+                    if (reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()).isPlaying()){
+
+                        reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()).setPlaying(false);
+
+                    }else {
+                        if (reproductor.isOnPlay()){
+                            Cancion enRep;
+                            enRep = reproductor.songOnPlay();
+                            reproductor.stop(enRep);
+                            reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()).setPlaying(true);
+                            reproductor.play(reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()), reproductor.getUsr());
+
+                        }else{
+                            reproductor.play(reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()), reproductor.getUsr());
+                            reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()).setPlaying(true);
+                        }
+
+                    }
 
                 }
             });
@@ -290,30 +311,7 @@ public class MarcoBusqueda extends JFrame {
         @Override
         public Object getCellEditorValue() {
             if (isPushed) {
-                ImageIcon play = new ImageIcon("src/com/company/images/play.png");
-                ImageIcon pause = new ImageIcon("src/com/company/images/pause.png");
 
-                //System.out.println(reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).getNombre());
-                if (reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).isPlaying()){
-
-                    reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).setPlaying(false);
-
-                }else {
-                    if (reproductor.isOnPlay()){
-                        Cancion enRep;
-                        enRep = reproductor.songOnPlay();
-                        reproductor.stop(enRep);
-                        reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).setPlaying(true);
-                        reproductor.play(reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()), reproductor.getUsr());
-
-                    }else{
-                        reproductor.play(reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()), reproductor.getUsr());
-                        reproductor.getListaSonando().getCanciones().get(this.getComponent().getX()).setPlaying(true);
-                    }
-
-
-
-                }
             }
             isPushed = false;
             return null;

@@ -1,6 +1,7 @@
 package com.company.controller;
 import com.company.Main;
 import com.company.modelo.Lista;
+import com.company.modelo.Recomendado;
 import com.company.modelo.Reproductor;
 import com.company.modelo.UserData;
 import com.company.view.MarcoBusqueda;
@@ -17,7 +18,7 @@ public class Driver implements ActionListener {
 
     }
     public Reproductor reproductor = new Reproductor();
-
+    public Recomendado recomendado = new Recomendado();
 
 
     @Override
