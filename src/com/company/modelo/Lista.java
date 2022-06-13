@@ -14,6 +14,8 @@ public class Lista {
     public Lista(String nombre){
         this.nombre = nombre;
         canciones = new ArrayList<>();
+        Cancion c = new Cancion(".",".",".",0);
+        canciones.add(c);
     }
 
     public String getNombre() {

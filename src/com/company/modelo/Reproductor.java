@@ -41,6 +41,9 @@ public class Reproductor {
                 return null;
             }
     }
+    public Lista getCancionesRepMus(){
+        return cancionesRepMus;
+    }
 
     public void play(Cancion cancion, UserData usr){
         this.cancion = cancion;
@@ -102,6 +105,10 @@ public class Reproductor {
             }
         }
         return Data;
+    }
+
+    public Lista getMegusta(){
+        return meGusta;
     }
 
 
