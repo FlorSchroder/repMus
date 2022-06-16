@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 public class DriverMarcoBusqueda implements ActionListener {
     private MarcoBusqueda marcoBsqueda;
-    private Reproductor reproductor;
     private Recomendado recomendado;
 
     //public DriverMarcoBusqueda(MarcoBusqueda marcoBsqueda, Reproductor reproductor){
@@ -36,19 +35,18 @@ public class DriverMarcoBusqueda implements ActionListener {
             System.out.println();
             if (!marcoBsqueda.getReproductor().getUsr().isEmptyArtist()){
                 mp.b1.setEnabled(true);
-                String ArtRecom = recomendado.recomendarArtista(marcoBsqueda.getReproductor().getListaSonando(), marcoBsqueda.getReproductor().getUsr());
+                String ArtRecom = recomendado.recomendarArtista(marcoBsqueda.getReproductor());
+
                 mp.b1.setText("Probá con " + ArtRecom);
             }
         }
         if (marcoBsqueda.btnBuscar == e.getSource()) {
-            Lista lista = marcoBsqueda.getReproductor().getListaSonando().BuscarPor( "nombre",marcoBsqueda.textBusqueda.getText());
+            Lista lista = marcoBsqueda.getLista().BuscarPor( "nombre",marcoBsqueda.textBusqueda.getText());
 
            if (lista == null) {
                System.out.println("No existe la cancion");
            }
         }
     }
-
-
 }
 

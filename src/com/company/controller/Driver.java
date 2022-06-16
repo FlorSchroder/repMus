@@ -13,15 +13,14 @@ import java.awt.event.ActionListener;
 
 public class Driver implements ActionListener {
     private MarcoPrincipal marco;
+    private Reproductor reproductor;
 
 
     public Driver(MarcoPrincipal marco){
         this.marco = marco;
+        reproductor = new Reproductor();
 
     }
-    public Reproductor reproductor = new Reproductor();
-    public Recomendado recomendado = new Recomendado();
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -33,54 +32,52 @@ public class Driver implements ActionListener {
 
         if (marco.b1 == e.getSource()){
             try {
-                MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Nuevo Artista", reproductor);
+                MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Nuevo Artista", reproductor, reproductor.getRecomendaciones());
                 marcoBsqueda.setVisible(true);
                 marco.setVisible(false);
             }catch (Exception ee){
-                ee.printStackTrace();
+                //ee.printStackTrace();
                 JOptionPane.showMessageDialog(marco,"No hay canciones en la lista");
             }
         }
         if (marco.b2 == e.getSource()){
             try {
-                MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Dia Chill", reproductor);
+                MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Dia Chill", reproductor, reproductor.getDiaNoche());
                 marcoBsqueda.setVisible(true);
                 marco.setVisible(false);
             }catch (Exception ee){
-                ee.printStackTrace();
+                //ee.printStackTrace();
                 JOptionPane.showMessageDialog(marco,"No hay canciones en la lista");
             }
         }
         if (marco.b3 == e.getSource()){
             try {
-                MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Para Salir", reproductor);
+                MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Para Salir", reproductor, reproductor.getCancionesRepMus());
                 marcoBsqueda.setVisible(true);
                 marco.setVisible(false);
             }catch (Exception ee){
-                ee.printStackTrace();
+                //ee.printStackTrace();
                 JOptionPane.showMessageDialog(marco,"No hay canciones en la lista");
             }
         }
         if (marco.b4 == e.getSource()){
             try {
-                reproductor.selectListaSonando(reproductor.buscar("Me Gusta"));
-                System.out.println(reproductor.getListaSonando().getNombre());
-                reproductor.getListaSonando().printCanciones();
-                MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Me Gusta", reproductor);
+                MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Me Gusta", reproductor, reproductor.getMegusta());
                 marcoBsqueda.setVisible(true);
                 marco.setVisible(false);
 
             }catch (Exception ee){
-                ee.printStackTrace();
+                //ee.printStackTrace();
                 JOptionPane.showMessageDialog(marco,"No hay canciones en la lista");
             }
         }
         if (marco.b5 == e.getSource()){
+            //reproductor.limpiarDatos();
+            System.out.println("ttt");
+            reproductor = reproductor.limpiarDatos();
         }
         if (marco.b6 == e.getSource()){
-            reproductor.selectListaSonando(reproductor.buscar("canciones Repmus"));
-            System.out.println(reproductor.getListaSonando().getNombre());
-            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Canciones RepMus", reproductor);
+            MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Canciones RepMus", reproductor, reproductor.getCancionesRepMus());
 
             marcoBsqueda.setVisible(true);
             marco.setVisible(false);
