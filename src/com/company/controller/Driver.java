@@ -1,4 +1,5 @@
 package com.company.controller;
+import com.company.modelo.Recomendado;
 import com.company.modelo.Reproductor;
 import com.company.view.MarcoBusqueda;
 import com.company.view.MarcoPrincipal;
@@ -10,10 +11,12 @@ import java.awt.event.ActionListener;
 public class Driver implements ActionListener {
     private MarcoPrincipal marco;
     private Reproductor reproductor;
+    private Recomendado recomendado;
 
     public Driver(MarcoPrincipal marco){
         this.marco = marco;
         this.reproductor = marco.getReproductor();
+        recomendado = new Recomendado();
     }
 
     @Override
@@ -29,7 +32,8 @@ public class Driver implements ActionListener {
         }
         if (marco.b2 == e.getSource()){
             try {
-                MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Dia Chill", reproductor, reproductor.getDiaNoche());
+                reproductor.setDiaNoche(recomendado.recomendarSegunHorario(reproductor));
+                MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Segun la hora", reproductor, reproductor.getDiaNoche());
                 marcoBsqueda.setVisible(true);
                 marco.setVisible(false);
             }catch (Exception ee){
@@ -47,6 +51,8 @@ public class Driver implements ActionListener {
         }
         if (marco.b4 == e.getSource()){
             try {
+                reproductor.clearMeGusta();
+                reproductor.setMeGusta();
                 MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Me Gusta", reproductor, reproductor.getMegusta());
                 marcoBsqueda.setVisible(true);
                 marco.setVisible(false);
@@ -56,7 +62,6 @@ public class Driver implements ActionListener {
             }
         }
         if (marco.b5 == e.getSource()){
-            System.out.println("ttt");
             reproductor = reproductor.limpiarDatos();
         }
         if (marco.b6 == e.getSource()){
