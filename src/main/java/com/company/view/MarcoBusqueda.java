@@ -4,6 +4,8 @@ import com.company.controller.DriverMarcoBusqueda;
 import com.company.modelo.Lista;
 import com.company.modelo.Reproductor;
 import com.company.modelo.Cancion;
+import com.company.modelo.Reproductor;
+
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -111,8 +113,8 @@ public class MarcoBusqueda extends JFrame {
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            ImageIcon downloaded = new ImageIcon("src/com/company/images/downloaded.png");
-            ImageIcon download = new ImageIcon("src/com/company/images/download.png");
+            ImageIcon downloaded = new ImageIcon("src/main/java/com/company/images/downloaded.png");
+            ImageIcon download = new ImageIcon("src/main/java/com/company/images/download.png");
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setBackground(table.getSelectionBackground());
@@ -148,8 +150,8 @@ public class MarcoBusqueda extends JFrame {
                 setForeground(table.getForeground());
                 setBackground(UIManager.getColor("Button.background"));
             }
-            ImageIcon play = new ImageIcon("src/com/company/images/play.png");
-            ImageIcon pause = new ImageIcon("src/com/company/images/pause.png");
+            ImageIcon play = new ImageIcon("src/main/java/com/company/images/play.png");
+            ImageIcon pause = new ImageIcon("src/main/java/com/company/images/pause.png");
 
             if (value == null){
                 setIcon(play);
@@ -170,8 +172,8 @@ public class MarcoBusqueda extends JFrame {
             button = new JButton();
             button.setOpaque(true);
             button.setSize(20,20);
-            ImageIcon downloaded = new ImageIcon("src/com/company/images/downloaded.png");
-            ImageIcon download = new ImageIcon("src/com/company/images/download.png");
+            ImageIcon downloaded = new ImageIcon("src/main/java/com/company/images/downloaded.png");
+            ImageIcon download = new ImageIcon("src/main/java/com/company/images/download.png");
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -236,8 +238,8 @@ public class MarcoBusqueda extends JFrame {
             button = new JButton();
             button.setOpaque(true);
             button.setSize(20,20);
-            ImageIcon play = new ImageIcon("src/com/company/images/play.png");
-            ImageIcon pause = new ImageIcon("src/com/company/images/pause.png");
+            ImageIcon play = new ImageIcon("src/main/java/com/company/images/play.png");
+            ImageIcon pause = new ImageIcon("src/main/java/com/company/images/pause.png");
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

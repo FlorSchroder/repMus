@@ -110,5 +110,3 @@ public class MarcoPrincipal extends JFrame {
     public JLabel nombreCancion;
 
 }
-
-
