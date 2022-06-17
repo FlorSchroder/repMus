@@ -25,19 +25,17 @@ public class DriverMarcoBusqueda implements ActionListener {
             marcoBsqueda.setVisible(false);
             System.out.println();
             if (!marcoBsqueda.getReproductor().getUsr().isEmptyArtist()){
-                mp.b1.setEnabled(true);
                 String ArtRecom = recomendado.recomendarArtista(marcoBsqueda.getReproductor());
-
                 mp.b1.setText("Probá con " + ArtRecom);
+                mp.b1.setEnabled(true);
             }
         }
         if (marcoBsqueda.btnBuscar == e.getSource()) {
             Lista lista = marcoBsqueda.getLista().BuscarPor( "nombre",marcoBsqueda.textBusqueda.getText());
 
-           if (lista == null) {
-               System.out.println("No existe la cancion");
-           }
+            if (lista == null) {
+                System.out.println("No existe la cancion");
+            }
         }
     }
 }
-
