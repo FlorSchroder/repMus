@@ -28,8 +28,6 @@ public class DriverMarcoBusqueda implements ActionListener {
                 String ArtRecom = recomendado.recomendarArtista(marcoBsqueda.getReproductor());
                 mp.b1.setText("Probá con " + ArtRecom);
                 mp.b1.setEnabled(true);
-                mp.b3.setText("Segui escuchando " + recomendado.recomendarGeneroString(marcoBsqueda.getReproductor()));
-                mp.b3.setEnabled(true);
             }
         }
         if (marcoBsqueda.btnBuscar == e.getSource()) {

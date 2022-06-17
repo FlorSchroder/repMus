@@ -9,7 +9,6 @@ public class Reproductor {
     private static Lista cancionesRepMus;
     private static Lista meGusta;
     private static Lista artista;
-    private static Lista genero;
     private static Lista diaNoche;
     public Object Data[][];
     private static UserData usr;
@@ -24,14 +23,12 @@ public class Reproductor {
             meGusta = new Lista("Me Gusta");
             artista = new Lista("Nuevo Artista");
             diaNoche = new Lista("diaNoche");
-            diaNoche = new Lista("Nuevo Genero");
             ndea();
             listas = new ArrayList<>();
             listas.add(cancionesRepMus);
             listas.add(meGusta);
             listas.add(artista);
             listas.add(diaNoche);
-            listas.add(genero);
             usr = new UserData();
         }
         return uniqueInstance;
@@ -53,7 +50,6 @@ public class Reproductor {
     public void siguiente(Cancion cancion){
         play(listaSonando.getSiguienteCancion(cancion));
     }
-
      */
 
     public Lista buscar (String nombre){
@@ -75,7 +71,6 @@ public class Reproductor {
         meGusta.getCanciones().clear();
         artista.getCanciones().clear();
         diaNoche.getCanciones().clear();
-        genero.getCanciones().clear();
         return this;
     }
 
@@ -110,9 +105,6 @@ public class Reproductor {
     }
     public Lista getDiaNoche(){
         return diaNoche;
-    }
-    public Lista getGenero(){
-        return genero;
     }
 
     public boolean isOnPlay(Lista listaSonando){
@@ -156,10 +148,6 @@ public class Reproductor {
 
     public void setDiaNoche(Lista lista){
         diaNoche.setCanciones(lista.getCanciones());
-    }
-
-    public void setGenero(Lista lista){
-        genero.setCanciones(lista.getCanciones());
     }
 
     public void clearMeGusta(){
