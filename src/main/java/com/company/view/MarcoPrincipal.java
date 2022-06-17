@@ -1,27 +1,20 @@
 package com.company.view;
 
 import com.company.controller.Driver;
-import com.company.modelo.Lista;
 import com.company.modelo.Reproductor;
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class MarcoPrincipal extends JFrame {
     public Reproductor reproductor;
-    private LocalDate ld = LocalDate.now();
-    private LocalDateTime ldt = LocalDateTime.now();
-    private String palabra;
-    private String diaSemana = ld.getDayOfWeek() + "";
 
-    public MarcoPrincipal(Reproductor reproductor) {
+    public MarcoPrincipal(Reproductor reproductor){
         this.reproductor = reproductor;
         setTitle("RepMus");
         setLayout(new BorderLayout());
-        setBounds(250, 200, 800, 400);
+        setBounds(250,200,800,400);
         JPanel panel1 = new JPanel();
-        panel1.setLayout(new GridLayout(3, 3));
+        panel1.setLayout(new GridLayout(3,3));
 
         // PANEL SUPERIOR //
         JPanel panelSup = new JPanel();
@@ -35,20 +28,11 @@ public class MarcoPrincipal extends JFrame {
         panelSup.add(btnBuscar);
         add(panelSup, BorderLayout.NORTH);
 
-        if (ldt.getHour() >= 20 || ldt.getHour() <= 5) { // Noche
-            if (diaSemana.equals("FRIDAY") || diaSemana.equals("SATURDAY")) { // Noche de rumbaaa
-                palabra = "Musica Para Salir";
-            } else {
-                palabra = "Musica Para Dormir";
-            }
-        } else {
-            palabra = "Musica Para El Dia";
-        }
 
         // PANEL CENTRAL //
         b1 = new JButton("Probá con ...");
-        b2 = new JButton(palabra);
-        b3 = new JButton("Seguí escuchando ...");
+        b2 = new JButton("...");
+        b3 = new JButton("Mis listas");
         b4 = new JButton("Me gusta");
         b5 = new JButton("Limpiar datos");
         b6 = new JButton("Canciones RepMus");
@@ -110,3 +94,5 @@ public class MarcoPrincipal extends JFrame {
     public JLabel nombreCancion;
 
 }
+
+
