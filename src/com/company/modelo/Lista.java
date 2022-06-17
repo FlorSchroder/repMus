@@ -14,8 +14,6 @@ public class Lista {
     public Lista(String nombre){
         this.nombre = nombre;
         canciones = new ArrayList<>();
-        Cancion c = new Cancion(".",".",".",0);
-        canciones.add(c);
     }
 
     public String getNombre() {
@@ -36,10 +34,6 @@ public class Lista {
 
     public void addCanciones(Cancion cancion){
         canciones.add(cancion);
-    }
-
-    public void removeCancion(Cancion cancion){
-        canciones.remove(cancion);
     }
 
     public Cancion getSiguienteCancion(Cancion c1){
@@ -63,27 +57,11 @@ public class Lista {
         return canciones.size();
     }
 
-    public ArrayList<Cancion> getLista(){
-        return canciones;
-    }
-
-    public String buscar (String cancion){
-        String c = null;
-        if (!canciones.isEmpty()){
-            for (int i = 0; i < canciones.size(); i++) {
-                if(cancion.equalsIgnoreCase(canciones.get(i).getNombre())){
-                    return canciones.get(i).getNombre();
-                }else { c = "No existe la cancion: " + cancion; }
-            }
-        }else {c = "La lista: " + this.nombre + " esta vacia";}
-        return c;
-    }
-
     public void printCanciones(){
         if (canciones.size() != 0)
         for (int i = 0; i < canciones.size(); i++) {
             System.out.println(canciones.get(i).getNombre());
-        }else{System.out.println("No hay canciones en esta lista de reproduccion");}
+        }else{System.out.println("falla prinCanciones No hay canciones en esta lista de reproduccion");}
     }
 
     public Lista BuscarPor(String param, String valor){
@@ -117,13 +95,11 @@ public class Lista {
                 }
             }
         }
-        listaRes.printCanciones();
         return listaRes;
     }
 
-
-
-
-
+    public void setNmbre(String n){
+        this.nombre = n;
+    }
 
 }

@@ -10,25 +10,35 @@ public class Recomendado {
 
     }
 
-    public String recomendarArtista(Lista lista, UserData usr){ //porque escuchaste [artista 1] ... [artista 2]
-        String artista = usr.getMasVeces(usr.Artista);
+    public String recomendarArtista(Reproductor r){ //porque escuchaste [artista 1] ... [artista 2]
+        String artista = r.getUsr().getMasVeces(r.getUsr().Artista);
         String ArtRec;
-        ArtRec = buscarRelacionado(lista, artista);
+        ArtRec = buscarRelacionado(r.getCancionesRepMus(), artista); //usamos las cancionesRemMus siempre pq puede recomendar cualquier cancion este o no descargada
+        r.recomendarArtista(ArtRec);
+        r.getRecomendaciones().printCanciones();
         return ArtRec;
     }
 
     public String buscarRelacionado(Lista lista, String artista){
         Lista l1;
         Lista l2;
-        Cancion c1;
-        Cancion c2;
+        Cancion c1 = new Cancion();
+        Cancion c2 = new Cancion();
         String genSug;
         String artSug;
         l1 = lista.BuscarPor("artista", artista);
-        c1 = l1.getCanciones().get((int)(Math.random()*l1.getSize()));
+        try {
+            c1 = l1.getCanciones().get((int)(Math.random()*l1.getSize()));
+        }catch (Exception e){
+            System.out.println("No hay canciones en la lista");
+        }
         genSug = c1.getGenero();
         l2 = lista.BuscarPor("genero", genSug);
-        c2 = l2.getCanciones().get((int)(Math.random()*l2.getSize()));
+        try {
+            c2 = l2.getCanciones().get((int)(Math.random()*l2.getSize()));
+        }catch (Exception e){
+            System.out.println("No hay canciones en la lista");
+        }
         artSug = c2.getArtista();
         while (artSug.equals(artista)){
             c2 = l2.getCanciones().get((int)(Math.random()*l2.getSize()));
