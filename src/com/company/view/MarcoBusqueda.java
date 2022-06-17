@@ -110,14 +110,12 @@ public class MarcoBusqueda extends JFrame {
     }
 
     public JButton btnBuscar;
-    //public JButton button;
     public JButton btnVolver;
     public JLabel labelBusqueda;
     public JTextField textBusqueda;
     public JTable tabla;
     public JLabel nombreCancion;
     public JProgressBar barra;
-
 
     class ButtonRenderer extends JButton implements TableCellRenderer {
 
@@ -177,7 +175,6 @@ public class MarcoBusqueda extends JFrame {
             return this;
         }
     }
-
 
     class ButtonEditor extends DefaultCellEditor {
 
@@ -330,21 +327,12 @@ public class MarcoBusqueda extends JFrame {
         }
     }
 
-
     public MarcoPrincipal getMarcoPrincipal() {
         return marcoPrincipal;
     }
 
-    public void setMarcoPrincipal(MarcoPrincipal marcoPrincipal) {
-        this.marcoPrincipal = marcoPrincipal;
-    }
-
     public Reproductor getReproductor() {
         return reproductor;
-    }
-
-    public void setReproductor(Reproductor reproductor) {
-        this.reproductor = reproductor;
     }
 
     public Lista getLista(){

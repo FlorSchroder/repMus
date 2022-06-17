@@ -14,8 +14,6 @@ public class Lista {
     public Lista(String nombre){
         this.nombre = nombre;
         canciones = new ArrayList<>();
-        //Cancion c = new Cancion(".",".",".",0);
-        //canciones.add(c);
     }
 
     public String getNombre() {
@@ -38,10 +36,6 @@ public class Lista {
         canciones.add(cancion);
     }
 
-    public void removeCancion(Cancion cancion){
-        canciones.remove(cancion);
-    }
-
     public Cancion getSiguienteCancion(Cancion c1){
         Cancion c2;
         if(canciones.contains(c1) && (canciones.get((canciones.indexOf(c1) + 1))!= null))  {
@@ -62,25 +56,6 @@ public class Lista {
     public int getSize(){
         return canciones.size();
     }
-
-    public ArrayList<Cancion> getLista(){
-        return canciones;
-    }
-
-    /*
-    public String buscar (String cancion){
-        String c = null;
-        if (!canciones.isEmpty()){
-            for (int i = 0; i < canciones.size(); i++) {
-                if(cancion.equalsIgnoreCase(canciones.get(i).getNombre())){
-                    return canciones.get(i).getNombre();
-                }else { c = "No existe la cancion: " + cancion; }
-            }
-        }else {c = "La lista: " + this.nombre + " esta vacia";}
-        return c;
-    }
-
-     */
 
     public void printCanciones(){
         if (canciones.size() != 0)

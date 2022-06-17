@@ -1,14 +1,15 @@
 package com.company.view;
 
 import com.company.controller.Driver;
-import com.company.modelo.UserData;
-
+import com.company.modelo.Reproductor;
 import javax.swing.*;
 import java.awt.*;
 
 public class MarcoPrincipal extends JFrame {
+    public Reproductor reproductor;
 
-    public MarcoPrincipal(){
+    public MarcoPrincipal(Reproductor reproductor){
+        this.reproductor = reproductor;
         setTitle("RepMus");
         setLayout(new BorderLayout());
         setBounds(250,200,800,400);
@@ -35,10 +36,6 @@ public class MarcoPrincipal extends JFrame {
         b4 = new JButton("Me gusta");
         b5 = new JButton("Limpiar datos");
         b6 = new JButton("Canciones RepMus");
-
-       /* if (usr.isEmptyArtist()){
-            b1.setEnabled(false);
-        }*/
 
         b1.addActionListener(new Driver(this));
         b2.addActionListener(new Driver(this));
@@ -80,8 +77,11 @@ public class MarcoPrincipal extends JFrame {
         add(panelInf, BorderLayout.SOUTH);
 
         // FIN PANEL INFERIOR //
-
     }
+    public Reproductor getReproductor(){
+        return reproductor;
+    }
+
     public JButton b1;
     public JButton b2;
     public JButton b3;

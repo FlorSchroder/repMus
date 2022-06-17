@@ -4,32 +4,33 @@ import java.util.ArrayList;
 
 public class Reproductor {
 
-    private ArrayList<Lista> listas;
-    private Lista cancionesRepMus;
-    private Lista meGusta;
-    private Lista artista;
-    private Lista diaNoche;
+    private static Reproductor uniqueInstance;
+    private static ArrayList<Lista> listas;
+    private static Lista cancionesRepMus;
+    private static Lista meGusta;
+    private static Lista artista;
+    private static Lista diaNoche;
     public Object Data[][];
-    private boolean isOnPlay;
-    private UserData usr;
+    private static UserData usr;
 
-    public Reproductor(){
-        //this.listaSonando = null;
-        cancionesRepMus = new Lista("Canciones RepMus" );
-        meGusta = new Lista("Me Gusta");
-        artista = new Lista("Nuevo Artista");
-        diaNoche = new Lista("diaNoche");
-        ndea();
-        listas = new ArrayList<>();
-        listas.add(cancionesRepMus);
-        listas.add(meGusta);
-        listas.add(artista);
-        listas.add(diaNoche);
-        usr = new UserData();
-    }
+    private Reproductor(){}
 
-    public void addLista(Lista listaNueva){
-        listas.add(listaNueva);
+    public static Reproductor getInstance(){
+        if(uniqueInstance == null){
+            uniqueInstance = new Reproductor();
+            cancionesRepMus = new Lista("Canciones RepMus" );
+            meGusta = new Lista("Me Gusta");
+            artista = new Lista("Nuevo Artista");
+            diaNoche = new Lista("diaNoche");
+            ndea();
+            listas = new ArrayList<>();
+            listas.add(cancionesRepMus);
+            listas.add(meGusta);
+            listas.add(artista);
+            listas.add(diaNoche);
+            usr = new UserData();
+        }
+        return uniqueInstance;
     }
 
     public void play(Cancion cancion){ //
@@ -62,8 +63,6 @@ public class Reproductor {
                     System.out.println("No esxiste una lista con ese nombre en el reproductor");
                 }
             }
-        }else {
-           // System.out.println("No hay listas en este reproductor");
         }
         return null;
     }
@@ -82,7 +81,6 @@ public class Reproductor {
     }
 
     public Object[][] getData(Reproductor reproductor, Lista listaSonando){
-        //this.selectListaSonando(this.buscar(reproductor.getListaSonando().getNombre()));
         Lista lista = this.buscar(listaSonando.getNombre());
         this.Data = new Object[lista.getSize()][4];
         for (int i = 0; i < lista.getSize(); i++){
@@ -97,7 +95,6 @@ public class Reproductor {
                 else if (j==3){
                     this.Data[i][j] = lista.getCanciones().get(i).isDescargado();
                 }
-
             }
         }
         return Data;
@@ -138,7 +135,6 @@ public class Reproductor {
         return null;
     }
 
-
     public int getProgreso(Lista lista){
         int duracion;
         int progreso;
@@ -150,7 +146,6 @@ public class Reproductor {
 
     public UserData getUsr(){
         return usr;
-
     }
 
     public void recomendarArtista(String artistaRecoemndado){
@@ -158,14 +153,7 @@ public class Reproductor {
         artista.setNmbre("Nuevo Artista");
     }
 
-    public void descargarCancion(Cancion c, String nombreDeLaLista){
-        buscar(nombreDeLaLista).addCanciones(c);
-    }
-    public void eliminarCancion(Cancion c, String nombreDeLaLista){
-        buscar(nombreDeLaLista).removeCancion(c);
-    }
-
-    private void ndea(){
+    private static void ndea(){
         Cancion c0 = new Cancion("Puesto", "Indie", "Babasonicos", 205);
         Cancion c1 = new Cancion("Jugo", "Indie", "Los Espiritus", 240);
         Cancion c2 = new Cancion("Agua Marfil", "Indie", "Usted Señalemelo", 252);
@@ -200,8 +188,5 @@ public class Reproductor {
         cancionesRepMus.addCanciones(c14);
         cancionesRepMus.addCanciones(c15);
         cancionesRepMus.addCanciones(c16);
-        meGusta.addCanciones(c0);
-        diaNoche.addCanciones(c1);
-
     }
 }
