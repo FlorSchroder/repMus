@@ -4,6 +4,8 @@ import com.company.controller.DriverMarcoBusqueda;
 import com.company.modelo.Lista;
 import com.company.modelo.Reproductor;
 import com.company.modelo.Cancion;
+import com.company.modelo.Reproductor;
+
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -43,28 +45,15 @@ public class MarcoBusqueda extends JFrame {
         add(panelBusqueda, BorderLayout.NORTH);
 
 
-        //JTable tabla = new JTable(datosFila, datosColumna);
-        //ModeloDatos modeloDatos = new ModeloDatos();
-
-        //tabla = new JTable(modeloDatos);
         DefaultTableModel dm = new DefaultTableModel();
-        dm.setDataVector(reproductor.getData(reproductor, lista), new Object[]{"Nombre", "Artista", "Genero", "Descargar", "Reproducir"});
+        dm.setDataVector(reproductor.getData(lista), new Object[]{"Nombre", "Artista", "Genero", "Descargar", "Reproducir"});
         tabla = new JTable(dm);
 
-        //modeloDatos.addTableModelListener(new DriverTabla());
-        //btnTabla = new botonTabla();
-
-        //btnTabla.addActionListener(new DriverMarcoBusqueda(this));
-        //tabla.setDefaultRenderer(Object.class, new TablaRender());
         tabla.getColumn("Descargar").setCellRenderer(new ButtonRenderer());
         tabla.getColumn("Descargar").setCellEditor(new ButtonEditor(new JCheckBox()));
         tabla.getColumn("Reproducir").setCellRenderer(new ButtonRendererRep());
         tabla.getColumn("Reproducir").setCellEditor(new ButtonEditorRep(new JCheckBox()));
 
-
-
-
-        //tabla.getColumn("Acciones").setCellRenderer(btnTabla2);
         tabla.setPreferredScrollableViewportSize(tabla.getPreferredSize());
 
         add(new JScrollPane(tabla), BorderLayout.CENTER);
@@ -106,7 +95,6 @@ public class MarcoBusqueda extends JFrame {
         add(panelInf, BorderLayout.SOUTH);
 
         // FIN PANEL INFERIOR //
-
     }
 
     public JButton btnBuscar;
@@ -123,12 +111,10 @@ public class MarcoBusqueda extends JFrame {
             setOpaque(true);
         }
 
-
-
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            ImageIcon downloaded = new ImageIcon("src/com/company/images/downloaded.png");
-            ImageIcon download = new ImageIcon("src/com/company/images/download.png");
+            ImageIcon downloaded = new ImageIcon("src/main/java/com/company/images/downloaded.png");
+            ImageIcon download = new ImageIcon("src/main/java/com/company/images/download.png");
             if (isSelected) {
                 setForeground(table.getSelectionForeground());
                 setBackground(table.getSelectionBackground());
@@ -164,8 +150,8 @@ public class MarcoBusqueda extends JFrame {
                 setForeground(table.getForeground());
                 setBackground(UIManager.getColor("Button.background"));
             }
-            ImageIcon play = new ImageIcon("src/com/company/images/play.png");
-            ImageIcon pause = new ImageIcon("src/com/company/images/pause.png");
+            ImageIcon play = new ImageIcon("src/main/java/com/company/images/play.png");
+            ImageIcon pause = new ImageIcon("src/main/java/com/company/images/pause.png");
 
             if (value == null){
                 setIcon(play);
@@ -186,23 +172,16 @@ public class MarcoBusqueda extends JFrame {
             button = new JButton();
             button.setOpaque(true);
             button.setSize(20,20);
-            ImageIcon downloaded = new ImageIcon("src/com/company/images/downloaded.png");
-            ImageIcon download = new ImageIcon("src/com/company/images/download.png");
+            ImageIcon downloaded = new ImageIcon("src/main/java/com/company/images/downloaded.png");
+            ImageIcon download = new ImageIcon("src/main/java/com/company/images/download.png");
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     System.out.println(tabla.getSelectedRow());
                     if (lista.getCanciones().get(tabla.getSelectedRow()).isDescargado()){
-
-                        //JOptionPane.showMessageDialog(button, "Eliminado!");
                         lista.getCanciones().get(tabla.getSelectedRow()).setDescargado(false);
-                        //reproductor.eliminarCancion(reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()));// ACAAA
-
                     }else {
                         lista.getCanciones().get(tabla.getSelectedRow()).setDescargado(true);
-                        //reproductor.descargarCancion(reproductor.getListaSonando().getCanciones().get(tabla.getSelectedRow()));
-                        //JOptionPane.showMessageDialog(button, "Descargado!");
-
                     }
 
                 }
@@ -259,8 +238,8 @@ public class MarcoBusqueda extends JFrame {
             button = new JButton();
             button.setOpaque(true);
             button.setSize(20,20);
-            ImageIcon play = new ImageIcon("src/com/company/images/play.png");
-            ImageIcon pause = new ImageIcon("src/com/company/images/pause.png");
+            ImageIcon play = new ImageIcon("src/main/java/com/company/images/play.png");
+            ImageIcon pause = new ImageIcon("src/main/java/com/company/images/pause.png");
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -292,9 +271,6 @@ public class MarcoBusqueda extends JFrame {
             }else {
                 button.setIcon(pause);
             }
-
-
-
         }
 
         @Override

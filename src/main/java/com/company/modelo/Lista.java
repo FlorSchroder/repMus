@@ -59,9 +59,9 @@ public class Lista {
 
     public void printCanciones(){
         if (canciones.size() != 0)
-        for (int i = 0; i < canciones.size(); i++) {
-            System.out.println(canciones.get(i).getNombre());
-        }else{System.out.println("falla prinCanciones No hay canciones en esta lista de reproduccion");}
+            for (int i = 0; i < canciones.size(); i++) {
+                System.out.println(canciones.get(i).getNombre());
+            }else{System.out.println("falla prinCanciones No hay canciones en esta lista de reproduccion");}
     }
 
     public Lista BuscarPor(String param, String valor){

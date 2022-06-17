@@ -15,7 +15,6 @@ public class Recomendado {
         String ArtRec;
         ArtRec = buscarRelacionado(r.getCancionesRepMus(), artista); //usamos las cancionesRemMus siempre pq puede recomendar cualquier cancion este o no descargada
         r.recomendarArtista(ArtRec);
-        r.getRecomendaciones().printCanciones();
         return ArtRec;
     }
 
@@ -48,7 +47,7 @@ public class Recomendado {
 
     }
 
-    public Lista recomendarSegunHorario(Lista lista){
+    public Lista recomendarSegunHorario(Reproductor r){
         LocalDate ld = LocalDate.now();
         LocalDateTime ldt = LocalDateTime.now();
         Lista l1;
@@ -56,15 +55,15 @@ public class Recomendado {
 
         if (ldt.getHour() >= 20 || ldt.getHour() <=5){ // Noche
             if (diaSemana.equals("FRIDAY") || diaSemana.equals("SATURDAY")){ // Noche de rumbaaa
-                l1 = lista.BuscarPor("genero", "cachengue");
+                l1 = r.getCancionesRepMus().BuscarPor("genero", "cachengue");
 
                 return l1;
             }else{
-                l1 = lista.BuscarPor("genero", "R&B");
+                l1 = r.getCancionesRepMus().BuscarPor("genero", "R&B");
                 return  l1;
             }
         } else {
-            l1 = lista.BuscarPor("genero", "Pop");
+            l1 = r.getCancionesRepMus().BuscarPor("genero", "Pop");
             return l1;
         }
     }
