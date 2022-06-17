@@ -42,7 +42,8 @@ public class Driver implements ActionListener {
         }
         if (marco.b3 == e.getSource()){
             try {
-                MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Para Salir", reproductor, reproductor.getCancionesRepMus());
+                reproductor.setGenero(recomendado.recomendarGenero(reproductor));
+                MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Nuevo Genero", reproductor, reproductor.getGenero());
                 marcoBsqueda.setVisible(true);
                 marco.setVisible(false);
             }catch (Exception ee){
