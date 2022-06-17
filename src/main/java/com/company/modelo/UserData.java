@@ -41,8 +41,6 @@ public class UserData {
         Escuchados = escuchados;
     }
 
-
-
     public UserData(){
         Genero = new HashMap<>();
         Artista = new HashMap<>();
