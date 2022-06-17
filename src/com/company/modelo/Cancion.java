@@ -8,7 +8,6 @@ public class Cancion {
     private boolean descargado;
     private boolean isPlaying;
 
-
     private int duracion;
 
     public Cancion(){}

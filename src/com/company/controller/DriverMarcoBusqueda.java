@@ -2,24 +2,15 @@ package com.company.controller;
 
 import com.company.modelo.Lista;
 import com.company.modelo.Recomendado;
-import com.company.modelo.Reproductor;
 import com.company.view.MarcoBusqueda;
 import com.company.view.MarcoPrincipal;
-
-import javax.swing.*;
-import javax.swing.table.TableCellEditor;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class DriverMarcoBusqueda implements ActionListener {
     private MarcoBusqueda marcoBsqueda;
     private Recomendado recomendado;
 
-    //public DriverMarcoBusqueda(MarcoBusqueda marcoBsqueda, Reproductor reproductor){
-      //  this.marcoBsqueda = marcoBsqueda;
-    //}
     public DriverMarcoBusqueda(MarcoBusqueda marcoBsqueda){
         this.marcoBsqueda = marcoBsqueda;
         recomendado = new Recomendado();
