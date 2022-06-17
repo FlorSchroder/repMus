@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.company.modelo.ReproductorTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-06-17T22:27:46" hostname="DESKTOP-3M7BU0L" time="0.161">
+  <properties/>
+  <testcase name="AddMeGusta()" classname="com.company.modelo.ReproductorTest" time="0.161"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
