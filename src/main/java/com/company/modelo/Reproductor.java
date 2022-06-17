@@ -12,6 +12,7 @@ public class Reproductor {
     private static Lista diaNoche;
     public Object Data[][];
     private static UserData usr;
+    private static Recomendado recomendado;
 
     private Reproductor(){}
 
@@ -49,7 +50,6 @@ public class Reproductor {
     public void siguiente(Cancion cancion){
         play(listaSonando.getSiguienteCancion(cancion));
     }
-
      */
 
     public Lista buscar (String nombre){
@@ -67,12 +67,6 @@ public class Reproductor {
         return null;
     }
 
-    public boolean listaExiste(String nombre){
-        if (buscar(nombre) != null){
-            return true;
-        }else{ return false; }
-    }
-
     public Reproductor limpiarDatos(){
         meGusta.getCanciones().clear();
         artista.getCanciones().clear();
@@ -80,7 +74,7 @@ public class Reproductor {
         return this;
     }
 
-    public Object[][] getData(Reproductor reproductor, Lista listaSonando){
+    public Object[][] getData(Lista listaSonando){
         Lista lista = this.buscar(listaSonando.getNombre());
         this.Data = new Object[lista.getSize()][4];
         for (int i = 0; i < lista.getSize(); i++){
@@ -149,8 +143,22 @@ public class Reproductor {
     }
 
     public void recomendarArtista(String artistaRecoemndado){
-        artista = cancionesRepMus.BuscarPor("artista", artistaRecoemndado);
-        artista.setNmbre("Nuevo Artista");
+        artista.setCanciones(cancionesRepMus.BuscarPor("artista", artistaRecoemndado).getCanciones());
+    }
+
+    public void setDiaNoche(Lista lista){
+        diaNoche.setCanciones(lista.getCanciones());
+    }
+
+    public void clearMeGusta(){
+        meGusta.getCanciones().clear();
+    }
+    public void setMeGusta(){
+        for (int i = 0; i < cancionesRepMus.getSize(); i++) {
+            if(cancionesRepMus.getCanciones().get(i).isDescargado()){
+                meGusta.addCanciones(cancionesRepMus.getCanciones().get(i));
+            }
+        }
     }
 
     private static void ndea(){
@@ -171,6 +179,27 @@ public class Reproductor {
         Cancion c14 = new Cancion("Salimo de Noche", "Cachengue", "Tiago PZK", 167);
         Cancion c15 = new Cancion("Plan A", "Cachengue", "Paulo Londra", 187);
         Cancion c16 = new Cancion("Cancion Lenta", "R&B", "Paco Oloroso", 187);
+        Cancion c17 = new Cancion("Run Cun", "Indie", "Babasonicos", 205);
+        Cancion c18 = new Cancion("Puesto", "Indie", "Babasonicos", 205);
+        Cancion c19 = new Cancion("Muñeco", "Indie", "Babasonicos", 205);
+        Cancion c20 = new Cancion("El Colmo", "Indie", "Babasonicos", 205);
+        Cancion c21 = new Cancion("Perdida En El Fuego", "Indie", "Los Espiritus", 240);
+        Cancion c22 = new Cancion("La Crecida", "Indie", "Los Espiritus", 240);
+        Cancion c23 = new Cancion("Noches De Verano", "Indie", "Los Espiritus", 240);
+        Cancion c24 = new Cancion("La Crecida", "Indie", "Los Espiritus", 240);
+        Cancion c25 = new Cancion("Don't Blame Me", "Pop", "Taylor Swift", 231);
+        Cancion c26 = new Cancion("Lover", "Pop", "Taylor Swift", 231);
+        Cancion c27 = new Cancion("Red", "Pop", "Taylor Swift", 231);
+        Cancion c28 = new Cancion("I Knew You Were Trouble", "Pop", "Taylor Swift", 231);
+        Cancion c29 = new Cancion("Watermelon Sugar", "Pop", "Harry Styles", 209);
+        Cancion c30 = new Cancion("Late Night Talking", "Pop", "Harry Styles", 209);
+        Cancion c31 = new Cancion("Adore You", "Pop", "Harry Styles", 209);
+        Cancion c32 = new Cancion("Sign of the Times", "Pop", "Harry Styles", 209);
+        Cancion c33 = new Cancion("Drivers License", "Pop", "Olivia Rodrigo", 217);
+        Cancion c34 = new Cancion("Traitor", "Pop", "Olivia Rodrigo", 217);
+        Cancion c35 = new Cancion("Never Be Me", "Pop", "Miley Cyrus", 208);
+        Cancion c36 = new Cancion("Breaking Ball", "Pop", "Miley Cyrus", 208);
+
         cancionesRepMus.addCanciones(c0);
         cancionesRepMus.addCanciones(c1);
         cancionesRepMus.addCanciones(c2);
@@ -188,5 +217,25 @@ public class Reproductor {
         cancionesRepMus.addCanciones(c14);
         cancionesRepMus.addCanciones(c15);
         cancionesRepMus.addCanciones(c16);
+        cancionesRepMus.addCanciones(c17);
+        cancionesRepMus.addCanciones(c18);
+        cancionesRepMus.addCanciones(c19);
+        cancionesRepMus.addCanciones(c20);
+        cancionesRepMus.addCanciones(c21);
+        cancionesRepMus.addCanciones(c22);
+        cancionesRepMus.addCanciones(c23);
+        cancionesRepMus.addCanciones(c24);
+        cancionesRepMus.addCanciones(c25);
+        cancionesRepMus.addCanciones(c26);
+        cancionesRepMus.addCanciones(c27);
+        cancionesRepMus.addCanciones(c28);
+        cancionesRepMus.addCanciones(c29);
+        cancionesRepMus.addCanciones(c30);
+        cancionesRepMus.addCanciones(c31);
+        cancionesRepMus.addCanciones(c32);
+        cancionesRepMus.addCanciones(c33);
+        cancionesRepMus.addCanciones(c34);
+        cancionesRepMus.addCanciones(c35);
+        cancionesRepMus.addCanciones(c36);
     }
 }
