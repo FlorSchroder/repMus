@@ -24,7 +24,7 @@ public class Reproductor {
             meGusta = new Lista("Me Gusta");
             artista = new Lista("Nuevo Artista");
             diaNoche = new Lista("diaNoche");
-            diaNoche = new Lista("Nuevo Genero");
+            genero = new Lista("Nuevo Genero");
             ndea();
             listas = new ArrayList<>();
             listas.add(cancionesRepMus);
@@ -48,12 +48,6 @@ public class Reproductor {
     public void stop(Cancion cancion){
         cancion.setPlaying(false);
     }
-
-    /*
-    public void siguiente(Cancion cancion){
-        play(listaSonando.getSiguienteCancion(cancion));
-    }
-     */
 
     public Lista buscar (String nombre){
         if (!listas.isEmpty()){
@@ -157,8 +151,8 @@ public class Reproductor {
         diaNoche.setCanciones(lista.getCanciones());
     }
 
-    public void setGenero(Lista lista){
-        genero.setCanciones(lista.getCanciones());
+    public void setGenero(String generoRec){
+        genero.setCanciones(cancionesRepMus.BuscarPor("genero", generoRec).getCanciones());
     }
 
     public void clearMeGusta(){

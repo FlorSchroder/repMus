@@ -46,9 +46,9 @@ public class MarcoPrincipal extends JFrame {
         }
 
         // PANEL CENTRAL //
-        b1 = new JButton("Probá con ...");
+        b1 = new JButton("Proba con ...");
         b2 = new JButton(palabra);
-        b3 = new JButton("Seguí escuchando ...");
+        b3 = new JButton("Segui escuchando ...");
         b4 = new JButton("Me gusta");
         b5 = new JButton("Limpiar datos");
         b6 = new JButton("Canciones RepMus");
