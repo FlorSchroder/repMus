@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReproductorTest {
-    Cancion ctest = new Cancion("Holis","Musicax","Karol J", 307);
+    Cancion ctest = new Cancion("Holis","Pop","Babasonicos", 307);
     Lista listest = new Lista("Canciones RepMus");
 
 
@@ -29,11 +29,13 @@ class ReproductorTest {
     }
 
     @Test
-    void buscarPorGenero(){
+    void RecomendarArtista(){
         listest.addCanciones(ctest);
         Lista list2;
         Reproductor rep = Reproductor.getInstance();
-        list2 = rep.buscar(rep.getCancionesRepMus().getCanciones().get(0).getGenero());
-        Assertions.assertEquals("Musicax",list2.getCanciones().get(0).getGenero());
+        rep.play(ctest);
+        rep.recomendarArtista(ctest.getArtista());
+        list2 = rep.getRecomendaciones();
+        Assertions.assertNotEquals(null,list2.getCanciones().get(0).getArtista());
     }
 }
