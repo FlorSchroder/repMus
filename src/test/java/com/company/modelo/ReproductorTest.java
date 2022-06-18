@@ -12,8 +12,7 @@ class ReproductorTest {
         Cancion ctest = new Cancion("Holis","Musica Espantosa","Karol J", 307);
         Lista listest = new Lista("Canciones RepMus");
         listest.addCanciones(ctest);
-        Reproductor rep = new Reproductor();
-        rep.addLista(listest);
+        Reproductor rep = Reproductor.getInstance();
         rep.getCancionesRepMus().getCanciones().get(0).setDescargado(true);
         assertTrue(rep.getCancionesRepMus().getCanciones().get(0).isDescargado());
 
