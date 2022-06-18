@@ -18,15 +18,12 @@ public class Recomendado {
         return ArtRec;
     }
 
-    public Lista recomendarGenero(Reproductor r){
+    public String recomendarGenero(Reproductor r){
         String genero = r.getUsr().getMasVeces(r.getUsr().Genero);
-        Lista lista = r.getCancionesRepMus().BuscarPor("genero", genero);
-        return lista;
-    }
-    public String recomendarGeneroString(Reproductor r){
-        String genero = r.getUsr().getMasVeces(r.getUsr().Genero);
+        r.setGenero(genero);
         return genero;
     }
+
 
     public String buscarRelacionado(Lista lista, String artista){
         Lista l1;

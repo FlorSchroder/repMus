@@ -42,7 +42,6 @@ public class Driver implements ActionListener {
         }
         if (marco.b3 == e.getSource()){
             try {
-                reproductor.setGenero(recomendado.recomendarGenero(reproductor));
                 MarcoBusqueda marcoBsqueda= new MarcoBusqueda(marco, "Nuevo Genero", reproductor, reproductor.getGenero());
                 marcoBsqueda.setVisible(true);
                 marco.setVisible(false);
